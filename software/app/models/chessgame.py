@@ -1,7 +1,4 @@
 from collections import namedtuple
-import logging
-import chess.pgn
-import io
 
 ChessFigure = namedtuple('ChessFigure', 'bb, bk, bn, bp, bq, br, wb, wk, wn, wp, wq, wr, empty')
 ChessPos = namedtuple('ChessPos', 'move_id, is_white_move, pos')
