@@ -1,0 +1,32 @@
+<RCC>
+  <qresource prefix="/pieces">
+    <file>img/pieces/bb.png</file>
+    <file>img/pieces/bk.png</file>
+    <file>img/pieces/bn.png</file>
+    <file>img/pieces/bp.png</file>
+    <file>img/pieces/bq.png</file>
+    <file>img/pieces/br.png</file>
+    <file>img/pieces/wb.png</file>
+    <file>img/pieces/wk.png</file>
+    <file>img/pieces/wn.png</file>
+    <file>img/pieces/wp.png</file>
+    <file>img/pieces/wq.png</file>
+    <file>img/pieces/wr.png</file>
+  </qresource>
+  <qresource prefix="icons">
+    <file>img/icons/checked.png</file>
+    <file>img/icons/wait.gif</file>
+    <file>img/icons/pause.png</file>
+    <file>img/icons/play.png</file>
+    <file>img/icons/checkbox_checked.png</file>
+    <file>img/icons/checkbox_unchecked.png</file>
+    <file>img/icons/computer.png</file>
+    <file>img/icons/crown.png</file>
+    <file>img/icons/left_arrow.png</file>
+    <file>img/icons/lightbulb.png</file>
+    <file>img/icons/pawn_icon.png</file>
+    <file>img/icons/player.png</file>
+    <file>img/icons/reset.png</file>
+    <file>img/icons/right_arrow.png</file>
+  </qresource>
+</RCC>
