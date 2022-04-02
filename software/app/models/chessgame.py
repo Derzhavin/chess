@@ -51,8 +51,8 @@ class ChessGame(object):
         return self.positions[self._cur_pos][i][j]
 
     @classmethod
-    def create_game_with_zero_moves(cls):
-        chess_game = ChessGame()
+    def create_game_with_zero_moves(cls, begin_date: date, winner: GameOutcome, white_player, black_player):
+        chess_game = ChessGame(begin_date, winner, white_player, black_player)
         for col in range(8):
             chess_game.positions[chess_game.cur_pos][1][col] = ChessFigure.bp
 
