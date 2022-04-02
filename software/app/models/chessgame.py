@@ -1,13 +1,47 @@
 from collections import namedtuple
+from dataclasses import dataclass
+from enum import Enum
+from datetime import date
 
 ChessFigure = namedtuple('ChessFigure', 'bb, bk, bn, bp, bq, br, wb, wk, wn, wp, wq, wr, empty')
 ChessPos = namedtuple('ChessPos', 'move_id, is_white_move, pos')
 
 
+@dataclass
+class Move(object):
+    class FigureColor(Enum):
+        white = 0
+        black = 1
+
+    start_move: str
+    end_move: str
+    figure: ChessFigure
+    figure_color = FigureColor.white
+    move_number = 0
+
+
+@dataclass
+class GamePlayer(object):
+    first_name: str
+    last_name: str
+    date_of_birth: date
+
+
 class ChessGame(object):
-    def __init__(self):
+    class GameOutcome(Enum):
+        white = 0
+        black = 1
+        draw = 2
+
+    def __init__(self, begin_date: date, winner: GameOutcome, white_player, black_player, moves = None):
+        if moves is None:
+            moves = []
+
         self.positions = [[[ChessFigure.empty for _ in range(8)] for _ in range(8)]]
+        self._moves = moves
         self._cur_pos = 0
+        self._begin_date = begin_date
+        self._winner = winner
 
     @property
     def cur_pos(self):
