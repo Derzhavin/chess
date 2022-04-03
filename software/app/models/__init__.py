@@ -1,1 +1,1 @@
-from .chessgame import ChessGame, ChessFigure, GamePlayer
+from .chessgame import ChessGame, ChessFigure, Move, GamePlayer
