@@ -9,15 +9,10 @@ ChessPos = namedtuple('ChessPos', 'move_id, is_white_move, pos')
 
 @dataclass
 class Move(object):
-    class FigureColor(Enum):
-        white = 0
-        black = 1
-
     start_move: str
     end_move: str
     figure: ChessFigure
-    figure_color = FigureColor.white
-    move_number = 0
+    move_number:int
 
 
 @dataclass
@@ -42,9 +37,18 @@ class ChessGame(object):
         self._cur_pos = 0
         self._begin_date = begin_date
         self._winner = winner
+        self.white_player = white_player
+        self.black_player = black_player
 
     @property
-    def cur_pos(self):
+    def moves(self) -> list[Move]:
+        return self._moves
+
+    def add_move(self, move: Move):
+        self._moves.append(move)
+
+    @property
+    def cur_pos(self) -> int:
         return self._cur_pos
 
     def fig(self, i, j) -> ChessFigure:
@@ -79,3 +83,7 @@ class ChessGame(object):
         chess_game.positions[chess_game.cur_pos][7][7] = ChessFigure.wr
 
         return chess_game
+
+    @cur_pos.setter
+    def cur_pos(self, value):
+        self._cur_pos = value

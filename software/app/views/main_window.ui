@@ -179,6 +179,7 @@
     <property name="title">
      <string>Файл</string>
     </property>
+    <addaction name="import_game_action"/>
    </widget>
    <addaction name="menu_file"/>
   </widget>
@@ -206,6 +207,11 @@
   <action name="action_choose_db">
    <property name="text">
     <string>Выбрать базу данных</string>
+   </property>
+  </action>
+  <action name="import_game_action">
+   <property name="text">
+    <string>Импортировать игру</string>
    </property>
   </action>
  </widget>
