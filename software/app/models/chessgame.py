@@ -54,6 +54,9 @@ class ChessGame(object):
     def fig(self, i, j) -> ChessFigure:
         return self.positions[self._cur_pos][i][j]
 
+    def get_all_data(self):
+        return self.positions, self._moves, self._begin_date, self._winner
+
     @classmethod
     def create_game_with_zero_moves(cls, begin_date: date, winner: GameOutcome, white_player, black_player):
         chess_game = ChessGame(begin_date, winner, white_player, black_player)
