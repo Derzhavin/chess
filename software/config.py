@@ -5,7 +5,7 @@ from logging import DEBUG
 class Config(object):
     log_file = 'chess.log'
     log_level = DEBUG
-
+    db_uri = 'sqlite:///chess.sqlite'
     main_window_ui_path = 'app/views/main_window.ui'
 
     chessboard_size = 500

@@ -2,7 +2,7 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsRectItem, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem
 from app.models import ChessFigure
-from app.factories import AssetsFactory
+from app.assets_factory import AssetsFactory
 
 
 class ChessBoardView(QObject):

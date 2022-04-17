@@ -3,7 +3,11 @@ from dataclasses import dataclass
 from enum import Enum
 from datetime import date
 
-ChessFigure = namedtuple('ChessFigure', 'bb, bk, bn, bp, bq, br, wb, wk, wn, wp, wq, wr, empty')
+
+class ChessFigure(Enum):
+    bb, bk, bn, bp, bq, br, wb, wk, wn, wp, wq, wr, empty = range(13)
+
+
 ChessPos = namedtuple('ChessPos', 'move_id, is_white_move, pos')
 
 
@@ -12,11 +16,12 @@ class Move(object):
     start_move: str
     end_move: str
     figure: ChessFigure
-    move_number:int
+    move_number: int
 
 
 @dataclass
 class GamePlayer(object):
+    id: int
     first_name: str
     last_name: str
     date_of_birth: date
@@ -24,11 +29,9 @@ class GamePlayer(object):
 
 class ChessGame(object):
     class GameOutcome(Enum):
-        white = 0
-        black = 1
-        draw = 2
+        white, black, draw = range(3)
 
-    def __init__(self, begin_date: date, winner: GameOutcome, white_player, black_player, moves = None):
+    def __init__(self, begin_date: date, winner: GameOutcome, white_player, black_player, moves=None):
         if moves is None:
             moves = []
 
@@ -51,6 +54,10 @@ class ChessGame(object):
     def cur_pos(self) -> int:
         return self._cur_pos
 
+    @property
+    def begin_date(self):
+        return self._begin_date
+
     def fig(self, i, j) -> ChessFigure:
         return self.positions[self._cur_pos][i][j]
 
@@ -58,7 +65,8 @@ class ChessGame(object):
         return self.positions, self._moves, self._begin_date, self._winner
 
     @classmethod
-    def create_game_with_zero_moves(cls, begin_date: date, winner: GameOutcome, white_player, black_player):
+    def create_game_with_zero_moves(cls, begin_date: date = date.today(), winner: GameOutcome = GameOutcome.draw,
+                                    white_player=None, black_player=None):
         chess_game = ChessGame(begin_date, winner, white_player, black_player)
         for col in range(8):
             chess_game.positions[chess_game.cur_pos][1][col] = ChessFigure.bp
@@ -74,7 +82,6 @@ class ChessGame(object):
 
         for col in range(8):
             chess_game.positions[chess_game.cur_pos][6][col] = ChessFigure.wp
-
 
         chess_game.positions[chess_game.cur_pos][7][0] = ChessFigure.wr
         chess_game.positions[chess_game.cur_pos][7][1] = ChessFigure.wk
