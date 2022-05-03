@@ -1,1 +1,2 @@
 from .main_window import MainWindow
+from .game_player_resolve_dialog import GamePlayerResolveDialog

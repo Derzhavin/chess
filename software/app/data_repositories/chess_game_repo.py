@@ -1,5 +1,5 @@
 from .repo_interfaces import IChessGameRepo
-from app.models import ChessGame
+from app.models import ChessGame, GamePlayer
 from sqlalchemy.orm import Session
 
 

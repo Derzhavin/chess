@@ -12,34 +12,35 @@ ChessPos = namedtuple('ChessPos', 'move_id, is_white_move, pos')
 
 
 @dataclass
-class Move(object):
-    start_move: str
-    end_move: str
-    figure: ChessFigure
-    move_number: int
+class Move:
+    id: int = None
+    start_move: str = None
+    end_move: str = None
+    figure: ChessFigure = None
+    move_number: int = None
 
 
 @dataclass
-class GamePlayer(object):
-    id: int
+class GamePlayer:
     first_name: str
     last_name: str
     date_of_birth: date
+    comment: str
 
 
-class ChessGame(object):
+class ChessGame:
     class GameOutcome(Enum):
         white, black, draw = range(3)
 
-    def __init__(self, begin_date: date, winner: GameOutcome, white_player, black_player, moves=None):
+    def __init__(self, begin_date: date, winner: GameOutcome, white_player: GamePlayer, black_player: GamePlayer, moves=None):
         if moves is None:
             moves = []
 
         self.positions = [[[ChessFigure.empty for _ in range(8)] for _ in range(8)]]
         self._moves = moves
         self._cur_pos = 0
-        self._begin_date = begin_date
-        self._winner = winner
+        self.begin_date = begin_date
+        self.winner = winner
         self.white_player = white_player
         self.black_player = black_player
 
@@ -54,15 +55,8 @@ class ChessGame(object):
     def cur_pos(self) -> int:
         return self._cur_pos
 
-    @property
-    def begin_date(self):
-        return self._begin_date
-
     def fig(self, i, j) -> ChessFigure:
         return self.positions[self._cur_pos][i][j]
-
-    def get_all_data(self):
-        return self.positions, self._moves, self._begin_date, self._winner
 
     @classmethod
     def create_game_with_zero_moves(cls, begin_date: date = date.today(), winner: GameOutcome = GameOutcome.draw,

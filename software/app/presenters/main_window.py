@@ -3,11 +3,10 @@ from datetime import date
 
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
 from app.views.chessboard import ChessBoardView
 from app.controllers.game_controllers import GameController
-from app.data_repositories.parsers import ChessGamePgnParser
 from app.data_repositories import IChessGameRepo
 
 
@@ -31,8 +30,8 @@ class MainWindow(QtWidgets.QMainWindow):
         options = QFileDialog.Options()
         pgn_path, _ = QFileDialog.getOpenFileName(None, "Импорт игры", "",
                                                   "Game (*.pgn)", options=options)
-        pgn_parser = ChessGamePgnParser(pgn_path)
-        chess_game = pgn_parser.load_first_game()
 
-        if pgn_parser.valid:
-            self._chess_game_repo.add(chess_game)
+        if self._chess_game_repo.load_game_from_pgn(pgn_path):
+            QMessageBox.information(self, 'Информация', 'Партия была успешно импортирована')
+        else:
+            QMessageBox.critical(self, 'Ошибка' , 'Не удалось импортировать партию')

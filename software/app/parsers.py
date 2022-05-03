@@ -10,30 +10,32 @@ class ChessGamePgnParser:
     def __init__(self, pgn_path: str):
         self.valid = False
         self.pgn_path = pgn_path
+        self.black_player = ['', '']
+        self.white_player = ['', '']
+        self.begin_date = date.today()
+        self.game_outcome = ChessGame.GameOutcome.draw
+        self.moves = []
 
-    def load_first_game(self) -> ChessGame:
-        white_player = GamePlayer('Billy', 'Jones', '1990')
-        black_player = GamePlayer('Jonny', 'Jones', '1990')
-        chess_game = ChessGame.create_game_with_zero_moves(date.today(), ChessGame.GameOutcome.white, white_player, black_player)
-
+    def load_first_game(self):
         self.valid = False
 
         pgn = open(self.pgn_path)
         first_game = chess.pgn.read_game(pgn)
-        chess_game.white_player = first_game.headers['White']
-        chess_game.white_player = first_game.headers['Black']
-        chess_game.date = date.fromisoformat(first_game.headers['Date'].replace('.', '-'))
+
+        self.white_player = first_game.headers['White'].split(',')
+        self.black_player = first_game.headers['Black'].split(',')
+        self.begin_date = date.fromisoformat(first_game.headers['Date'].replace('.', '-'))
 
         parsed_game_outcome = first_game.headers['Result']
 
         if parsed_game_outcome == '1-0':
-            chess_game.game_outcome = ChessGame.GameOutcome.white
+            self.game_outcome = ChessGame.GameOutcome.white
         elif parsed_game_outcome == '0-1':
-            chess_game.game_outcome = ChessGame.GameOutcome.black
+            self.game_outcome = ChessGame.GameOutcome.black
         elif parsed_game_outcome == '1/2-1/2':
-            chess_game.game_outcome = ChessGame.GameOutcome.draw
+            self.game_outcome = ChessGame.GameOutcome.draw
         else:
-            return ChessGame()
+            return
 
         board = first_game.board()
         for i, move in enumerate(first_game.mainline_moves()):
@@ -57,8 +59,7 @@ class ChessGamePgnParser:
                 chess_figure = ChessFigure.wk if board.turn == chess.WHITE else ChessFigure.bk
 
             chess_move = Move(chess_figure, move_begin, move_end, i)
-            chess_game.add_move(chess_move)
+            self.moves.append(chess_move)
             board.push(move)
-        self.valid = True
 
-        return chess_game
+        self.valid = True
