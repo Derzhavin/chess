@@ -1,18 +1,16 @@
-import logging
-from datetime import date
-
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
 from app.views.chessboard import ChessBoardView
 from app.controllers.game_controllers import GameController
-from app.data_repositories import IChessGameRepo
+from app.data_repositories import ChessGameRepo, GamePlayerRepo
+from app.services import PgnImportService
 
 
 class MainWindow(QtWidgets.QMainWindow):
 
-    def __init__(self, chess_game_repo: IChessGameRepo, config):
+    def __init__(self, engine, config):
         super().__init__()
         uic.loadUi(config.main_window_ui_path, self)
         self.config = config
@@ -22,8 +20,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self._game_controller = GameController(self._chessboard_view)
         self._game_controller.represent_postion()
-        self._chess_game_repo = chess_game_repo
-
+        self.engine = engine
         self.import_game_action.triggered.connect(self.on_game_import_triggered)
 
     def on_game_import_triggered(self):
@@ -31,7 +28,8 @@ class MainWindow(QtWidgets.QMainWindow):
         pgn_path, _ = QFileDialog.getOpenFileName(None, "Импорт игры", "",
                                                   "Game (*.pgn)", options=options)
 
-        if self._chess_game_repo.load_game_from_pgn(pgn_path):
+        pgn_import_service = PgnImportService(self.engine, ChessGameRepo, GamePlayerRepo)
+        if pgn_import_service.load_game_from_pgn(pgn_path, self, self.config):
             QMessageBox.information(self, 'Информация', 'Партия была успешно импортирована')
         else:
             QMessageBox.critical(self, 'Ошибка' , 'Не удалось импортировать партию')

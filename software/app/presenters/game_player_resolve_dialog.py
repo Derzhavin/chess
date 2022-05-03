@@ -1,6 +1,4 @@
 from PyQt5 import QtWidgets, uic
-# from app.data_repositories import GamePlayerRepo
-from app.models import GamePlayer
 from enum import Enum
 
 from app.models.qt_models import GamePlayerTableModel

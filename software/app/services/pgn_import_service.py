@@ -1,23 +1,23 @@
-from typing import Callable
-
 from PyQt5.QtWidgets import QMessageBox, QWidget
-from app.data_repositories import IChessGameRepo, IGamePlayerRepo
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, sessionmaker
 
-from software.app.parsers import ChessGamePgnParser
-from software.app.models import ChessGame, GamePlayer
-from software.app.presenters import GamePlayerResolveDialog
+from app.parsers import ChessGamePgnParser
+from app.models import ChessGame, GamePlayer
+from app.presenters import GamePlayerResolveDialog
 
 from sqlalchemy import and_
 from typing import TypeVar, Generic
 
+ChessGameRepoT = TypeVar('ChessGameRepoT')
+GamePlayerRepoT = TypeVar('GamePlayerRepoT')
 
-class PgnImportService(Generic[IChessGameRepo, IGamePlayerRepo]):
 
-    def __init__(self, session: Session):
-        self.session = session
-        self.chess_game_repo = IChessGameRepo(session)
-        self.game_player_repo = IGamePlayerRepo(session)
+class PgnImportService:
+
+    def __init__(self, engine, chess_game_repo_cls: ChessGameRepoT, game_player_repo_cls: GamePlayerRepoT):
+        self.session = sessionmaker(engine)()
+        self.chess_game_repo = chess_game_repo_cls(self.session)
+        self.game_player_repo = game_player_repo_cls(self.session)
 
     def load_game_from_pgn(self, pgn_path: str, parent_widget: QWidget, config) -> bool:
         pgn_parser = ChessGamePgnParser(pgn_path)
@@ -26,13 +26,13 @@ class PgnImportService(Generic[IChessGameRepo, IGamePlayerRepo]):
         if not pgn_parser.valid:
             return False
 
+        self.session.begin()
+
         first_name, last_name = pgn_parser.white_player
         criterion = and_(GamePlayer.first_name == first_name, GamePlayer.first_name == last_name)
 
-        self.session.begin()
-
         if self.game_player_repo.exists(criterion):
-            if not GamePlayerResolveDialog(parent_widget, config).exec():
+            if not GamePlayerResolveDialog(parent_widget, config, self.game_player_repo).exec():
                 pass
             else:
                 pass
@@ -50,4 +50,10 @@ class PgnImportService(Generic[IChessGameRepo, IGamePlayerRepo]):
         chess_game = ChessGame(pgn_parser.begin_date, pgn_parser.game_outcome, white_player, black_player, pgn_parser.moves)
 
         self.chess_game_repo.add(chess_game)
+
+        self.session.commit()
+
         return True
+
+    def __del__(self):
+        self.session.close()

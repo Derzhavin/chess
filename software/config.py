@@ -7,9 +7,9 @@ class Config(object):
     log_level = DEBUG
     db_uri = 'sqlite:///chess.sqlite'
     main_window_ui_path = 'app/views/main_window.ui'
-    game_player_resolve_step_select_opt_dialog = 'game_player_resolve_step_select_opt_dialog.ui'
-    game_player_resolve_step_choose_player_opt_dialog = 'game_player_resolve_step_choose_player_opt_dialog.ui'
-    game_player_resolve_step_create_player_opt_dialog = 'game_player_resolve_step_create_player_opt_dialog.ui'
+    game_player_resolve_step_select_opt_dialog = 'app/views/game_player_resolve_step_select_opt_dialog.ui'
+    game_player_resolve_step_choose_player_opt_dialog = 'app/views/game_player_resolve_step_choose_player_opt_dialog.ui'
+    game_player_resolve_step_create_player_opt_dialog = 'app/views/game_player_resolve_step_create_player_opt_dialog.ui'
 
     chessboard_size = 500
     chessboard_x = 0

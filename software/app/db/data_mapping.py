@@ -55,10 +55,8 @@ chess_player_table = Table(
 )
 
 mapper_registry.map_imperatively(ChessGame, chess_game_table, properties={
-    'moves': relationship(Move, backref='chess_game'),
+    'moves': relationship(Move),
 })
 
 mapper_registry.map_imperatively(Move, move_table)
-mapper_registry.map_imperatively(GamePlayer, chess_player_table, properties={
-    'chess_games': relationship(ChessGame),
-})
+mapper_registry.map_imperatively(GamePlayer, chess_player_table)

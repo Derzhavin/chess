@@ -16,7 +16,8 @@ class GamePlayerRepo(IGamePlayerRepo):
 
     def exists(self, criterion):
         q = self.__db_session.query(GamePlayer).filter(criterion)
-        return self.__db_session.query(q.exists())
+        existence = self.__db_session.query(q.exists()).scalar()
+        return existence
 
     def count(self, criterion):
         return self.__db_session.query(GamePlayer).filter(criterion).count()
