@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, SmallInteger, ForeignKey, Integer, Date, 
 from sqlalchemy.orm import declarative_base, relationship
 
 
-class ChessFigure(enum.Enum):
+class ChessFigure(enum.IntEnum):
     bb, bk, bn, bp, bq, br, wb, wk, wn, wp, wq, wr, empty = range(13)
 
 
@@ -67,21 +67,14 @@ class ChessGame(Base):
     moves = relationship('Move')
 
     def __init__(self, begin_date: date, winner: GameOutcome, white_player: ChessPlayer, black_player: ChessPlayer,
-                 moves=None):
-        if moves is None:
-            moves = []
-
+                 moves):
         self.positions = [[[ChessFigure.empty for _ in range(8)] for _ in range(8)]]
-        self._moves = moves
+        self.moves = moves
         self._cur_pos = 0
         self.begin_date = begin_date
         self.winner = winner
         self.white_player = white_player
         self.black_player = black_player
-
-    @property
-    def moves(self) -> list[Move]:
-        return self._moves
 
     def add_move(self, move: Move):
         self._moves.append(move)
@@ -96,7 +89,7 @@ class ChessGame(Base):
     @classmethod
     def create_game_with_zero_moves(cls, begin_date: date = date.today(), winner: GameOutcome = GameOutcome.draw,
                                     white_player=None, black_player=None):
-        chess_game = ChessGame(begin_date, winner, white_player, black_player)
+        chess_game = ChessGame(begin_date, winner, white_player, black_player, [])
         for col in range(8):
             chess_game.positions[chess_game.cur_pos][1][col] = ChessFigure.bp
 
