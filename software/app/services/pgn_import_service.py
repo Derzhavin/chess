@@ -29,11 +29,12 @@ class PgnImportService:
         self.session.begin()
 
         first_name, last_name = pgn_parser.white_player
-        criterion = and_(ChessPlayer.first_name == first_name, ChessPlayer.first_name == last_name)
+        criterion = and_(ChessPlayer.first_name == first_name, ChessPlayer.last_name == last_name)
 
         if self.game_player_repo.exists(criterion):
-            if not GamePlayerResolveDialog(parent_widget, config, self.game_player_repo).exec():
-                pass
+            if not GamePlayerResolveDialog(parent_widget, config, self.game_player_repo, criterion).exec():
+                self.session.rollback()
+                return False
             else:
                 pass
         else:
@@ -41,10 +42,12 @@ class PgnImportService:
             self.game_player_repo.add_player(white_player)
 
         first_name, last_name = pgn_parser.black_player
-        criterion = and_(ChessPlayer.first_name == first_name, ChessPlayer.first_name == last_name)
+        criterion = and_(ChessPlayer.first_name == first_name, ChessPlayer.last_name == last_name)
 
         if self.game_player_repo.exists(criterion):
-            pass
+            if not GamePlayerResolveDialog(parent_widget, config, self.game_player_repo).exec():
+                self.session.rollback()
+                return False
         else:
             black_player = ChessPlayer(first_name, last_name, None, '')
             self.game_player_repo.add_player(black_player)

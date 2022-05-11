@@ -6,19 +6,19 @@ from app.data_repositories import IGamePlayerRepo
 
 class GamePlayerTableModel(QAbstractTableModel):
 
-    def __init__(self, game_player_repo: IGamePlayerRepo, criterion):
+    def __init__(self, chess_player_repo: IGamePlayerRepo, criterion):
         super().__init__()
-        self._game_player_repo = game_player_repo
+        self._chess_player_repo = chess_player_repo
         self.criterion = criterion
 
     def columnCount(self, parent: QModelIndex = ...) -> int:
         return 5
 
     def rowCount(self, parent: QModelIndex = ...) -> int:
-        return self._game_player_repo.count(self.criterion)
+        return self._chess_player_repo.count(self.criterion)
 
     def data(self, index: QModelIndex, role: int = ...) -> typing.Any:
-        game_players = self._game_player_repo.get(self.criterion)
+        game_players = self._chess_player_repo.get_players(self.criterion)
 
         if not index.isValid():
             return QVariant()
@@ -27,7 +27,16 @@ class GamePlayerTableModel(QAbstractTableModel):
             return QVariant()
 
         if role == Qt.DisplayRole:
-            return game_players[index.row()][index.column()]
+            if index.column() == 0:
+                return game_players[index.row()].id
+            if index.column() == 1:
+                return game_players[index.row()].first_name
+            if index.column() == 2:
+                return game_players[index.row()].last_name
+            if index.column() == 3:
+                return game_players[index.row()].date_of_birth
+            if index.column() == 4:
+                return game_players[index.row()].comment
 
         return QVariant()
 
