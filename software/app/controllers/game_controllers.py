@@ -1,4 +1,4 @@
-from app.models import ChessGame, ChessFigure
+from app.store import ChessGame, ChessFigure
 from app.views import ChessBoardView
 
 

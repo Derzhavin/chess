@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from .data_mapping import metadata_obj
+from .chessgame import metadata_obj
 
 
 def init_engine(uri):

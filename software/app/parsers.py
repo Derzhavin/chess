@@ -1,6 +1,6 @@
 from datetime import date
 
-from app.models import ChessGame, ChessFigure, Move, GamePlayer
+from app.store import ChessGame, ChessFigure, Move, ChessPlayer
 
 import chess.pgn
 

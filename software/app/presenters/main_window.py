@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
 from app.views.chessboard import ChessBoardView
 from app.controllers.game_controllers import GameController
-from app.data_repositories import ChessGameRepo, GamePlayerRepo
+from app.data_repositories import ChessGameRepo, ChessPlayerRepo
 from app.services import PgnImportService
 
 
@@ -28,7 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
         pgn_path, _ = QFileDialog.getOpenFileName(None, "Импорт игры", "",
                                                   "Game (*.pgn)", options=options)
 
-        pgn_import_service = PgnImportService(self.engine, ChessGameRepo, GamePlayerRepo)
+        pgn_import_service = PgnImportService(self.engine, ChessGameRepo, ChessPlayerRepo)
         if pgn_import_service.load_game_from_pgn(pgn_path, self, self.config):
             QMessageBox.information(self, 'Информация', 'Партия была успешно импортирована')
         else:

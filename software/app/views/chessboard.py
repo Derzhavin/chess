@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsRectItem, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem
-from app.models import ChessFigure
+from app.store import ChessFigure
 from app.assets_factory import AssetsFactory
 
 

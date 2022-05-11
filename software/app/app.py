@@ -2,7 +2,7 @@ from PyQt5.QtCore import QObject
 
 from .assets_factory import AssetsFactory
 from .presenters import MainWindow
-from .db import init_engine
+from .store import init_engine
 
 import logging
 

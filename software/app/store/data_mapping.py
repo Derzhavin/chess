@@ -40,8 +40,6 @@ chess_game_table = Table(
     Column('id', BigInteger, primary_key=True),
     Column('begin_date', Date, nullable=False),
     Column('winner', Enum(ChessGame.GameOutcome), nullable=False),
-    Column('white_player', BigInteger, ForeignKey('chess_player.id'), nullable=True),
-    Column('black_player', BigInteger, ForeignKey('chess_player.id'), nullable=True),
 )
 
 chess_player_table = Table(
@@ -54,9 +52,18 @@ chess_player_table = Table(
     Column('comment', String, nullable=True)
 )
 
+chess_player_chess_game_table = Table('chess_player_chess_game', metadata_obj,
+    Column('chess_player_id', ForeignKey('chess_player.id')),
+    Column('chess_game_id', ForeignKey('chess_game.id')),
+    Column('color', Enum(ChessGame.Color), nullable=False)
+)
+
 mapper_registry.map_imperatively(ChessGame, chess_game_table, properties={
     'moves': relationship(Move),
+    'chess_players': relationship(GamePlayer, secondary=chess_player_chess_game_table, backref='chess_games')
 })
 
 mapper_registry.map_imperatively(Move, move_table)
-mapper_registry.map_imperatively(GamePlayer, chess_player_table)
+mapper_registry.map_imperatively(GamePlayer, chess_player_table, properties={
+    'chess_games': relationship(ChessGame, secondary=chess_player_chess_game_table, backref='chess_players')
+})

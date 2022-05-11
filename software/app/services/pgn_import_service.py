@@ -2,19 +2,19 @@ from PyQt5.QtWidgets import QMessageBox, QWidget
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.parsers import ChessGamePgnParser
-from app.models import ChessGame, GamePlayer
+from app.store import ChessGame, ChessPlayer
 from app.presenters import GamePlayerResolveDialog
 
 from sqlalchemy import and_
 from typing import TypeVar, Generic
 
 ChessGameRepoT = TypeVar('ChessGameRepoT')
-GamePlayerRepoT = TypeVar('GamePlayerRepoT')
+ChessPlayerRepoT = TypeVar('ChessPlayerRepoT')
 
 
 class PgnImportService:
 
-    def __init__(self, engine, chess_game_repo_cls: ChessGameRepoT, game_player_repo_cls: GamePlayerRepoT):
+    def __init__(self, engine, chess_game_repo_cls: ChessGameRepoT, game_player_repo_cls: ChessPlayerRepoT):
         self.session = sessionmaker(engine)()
         self.chess_game_repo = chess_game_repo_cls(self.session)
         self.game_player_repo = game_player_repo_cls(self.session)
@@ -29,7 +29,7 @@ class PgnImportService:
         self.session.begin()
 
         first_name, last_name = pgn_parser.white_player
-        criterion = and_(GamePlayer.first_name == first_name, GamePlayer.first_name == last_name)
+        criterion = and_(ChessPlayer.first_name == first_name, ChessPlayer.first_name == last_name)
 
         if self.game_player_repo.exists(criterion):
             if not GamePlayerResolveDialog(parent_widget, config, self.game_player_repo).exec():
@@ -37,19 +37,25 @@ class PgnImportService:
             else:
                 pass
         else:
-            white_player = GamePlayer(first_name, last_name, None, '')
+            white_player = ChessPlayer(first_name, last_name, None, '')
+            self.game_player_repo.add_player(white_player)
 
         first_name, last_name = pgn_parser.black_player
-        criterion = and_(GamePlayer.first_name == first_name, GamePlayer.first_name == last_name)
+        criterion = and_(ChessPlayer.first_name == first_name, ChessPlayer.first_name == last_name)
 
         if self.game_player_repo.exists(criterion):
             pass
         else:
-            black_player = GamePlayer(first_name, last_name, None, '')
+            black_player = ChessPlayer(first_name, last_name, None, '')
+            self.game_player_repo.add_player(black_player)
 
-        chess_game = ChessGame(pgn_parser.begin_date, pgn_parser.game_outcome, white_player, black_player, pgn_parser.moves)
+        chess_game = ChessGame(
+            pgn_parser.begin_date,
+            pgn_parser.game_outcome,
+            white_player, black_player,
+            pgn_parser.moves)
 
-        self.chess_game_repo.add(chess_game)
+        self.chess_game_repo.add_game(chess_game)
 
         self.session.commit()
 
