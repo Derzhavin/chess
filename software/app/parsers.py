@@ -22,10 +22,14 @@ class ChessGamePgnParser:
         pgn = open(self.pgn_path)
         first_game = chess.pgn.read_game(pgn)
 
-        self.white_player = first_game.headers['White'].split(',')
-        self.black_player = first_game.headers['Black'].split(',')
-        self.begin_date = date.fromisoformat(first_game.headers['Date'].replace('.', '-'))
+        delim = ',' if ',' in first_game.headers['White'] else ' '
 
+        self.white_player = first_game.headers['White'].split(delim)
+        self.black_player = first_game.headers['Black'].split(delim)
+        try:
+            self.begin_date = date.fromisoformat(first_game.headers['Date'].replace('.', '-'))
+        except:
+            self.begin_date = None
         parsed_game_outcome = first_game.headers['Result']
 
         if parsed_game_outcome == '1-0':

@@ -60,7 +60,7 @@ class ChessGame(Base):
     __tablename__ = 'chess_game'
 
     id = Column('id', Integer, primary_key=True, autoincrement=True)
-    begin_date = Column('begin_date', Date, nullable=False)
+    begin_date = Column('begin_date', Date, nullable=True)
     winner = Column('winner', Enum(GameOutcome), nullable=False)
 
     chess_players = relationship('AssociationChessPlayerChessGame', back_populates='chess_game')
