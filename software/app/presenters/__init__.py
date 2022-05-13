@@ -1,2 +1,2 @@
-from .game_player_resolve_dialog import GamePlayerResolveDialog
+from .chess_player_resolve_dialog import ChessPlayerResolveDialog
 from .main_window import MainWindow

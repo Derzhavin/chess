@@ -12,7 +12,7 @@ PyQt5.uic.properties - DEBUG - setting property pyuicSpacing
 PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout_2
 PyQt5.uic.uiparser - DEBUG - push BoardView board_graphics_view
 PyQt5.uic.uiparser - DEBUG - pop widget BoardView board_graphics_view
-PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002D8BB088940>
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001B89FDC8AF0>
 PyQt5.uic.properties - DEBUG - setting property spacing
 PyQt5.uic.properties - DEBUG - setting property rightMargin
 PyQt5.uic.properties - DEBUG - setting property pyuicMargins
@@ -28,7 +28,7 @@ PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.properties - DEBUG - setting property icon
 PyQt5.uic.uiparser - DEBUG - push QToolButton play_tool_button
 PyQt5.uic.uiparser - DEBUG - pop widget QToolButton play_tool_button
-PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002D8BB088940>
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001B89FDC8AF0>
 PyQt5.uic.properties - DEBUG - setting property enabled
 PyQt5.uic.properties - DEBUG - setting property minimumSize
 PyQt5.uic.properties - DEBUG - setting property maximumSize
@@ -37,7 +37,7 @@ PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.properties - DEBUG - setting property icon
 PyQt5.uic.uiparser - DEBUG - push QToolButton prev_step_tool_button
 PyQt5.uic.uiparser - DEBUG - pop widget QToolButton prev_step_tool_button
-PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002D8BB088940>
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001B89FDC8AF0>
 PyQt5.uic.properties - DEBUG - setting property enabled
 PyQt5.uic.properties - DEBUG - setting property minimumSize
 PyQt5.uic.properties - DEBUG - setting property maximumSize
@@ -46,7 +46,7 @@ PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.properties - DEBUG - setting property icon
 PyQt5.uic.uiparser - DEBUG - push QToolButton next_step_tool_button
 PyQt5.uic.uiparser - DEBUG - pop widget QToolButton next_step_tool_button
-PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002D8BB088940>
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001B89FDC8AF0>
 PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
 PyQt5.uic.properties - DEBUG - setting property spacing
 PyQt5.uic.properties - DEBUG - setting property pyuicSpacing
@@ -57,23 +57,23 @@ PyQt5.uic.properties - DEBUG - setting property mouseTracking
 PyQt5.uic.properties - DEBUG - setting property tabletTracking
 PyQt5.uic.uiparser - DEBUG - push QTableView table_view_moves
 PyQt5.uic.uiparser - DEBUG - pop widget QTableView table_view_moves
-PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000002D8BB088940>
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001B89FDC8AF0>
 PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout_3
 PyQt5.uic.uiparser - DEBUG - pop layout QVBoxLayout verticalLayout
 PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout_2
 PyQt5.uic.uiparser - DEBUG - pop widget QWidget centralwidget
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.main_window.MainWindow object at 0x000002D8BB02C9D0>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.main_window.MainWindow object at 0x000001B89FD6CB80>
 PyQt5.uic.properties - DEBUG - setting property geometry
 PyQt5.uic.uiparser - DEBUG - push QMenuBar menubar
 PyQt5.uic.properties - DEBUG - setting property title
 PyQt5.uic.uiparser - DEBUG - push QMenu menu_file
 PyQt5.uic.uiparser - DEBUG - pop widget QMenu menu_file
-PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QMenuBar object at 0x000002D8BB0C50D0>
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QMenuBar object at 0x000001B89FDFF280>
 PyQt5.uic.uiparser - DEBUG - pop widget QMenuBar menubar
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.main_window.MainWindow object at 0x000002D8BB02C9D0>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.main_window.MainWindow object at 0x000001B89FD6CB80>
 PyQt5.uic.uiparser - DEBUG - push QStatusBar statusbar
 PyQt5.uic.uiparser - DEBUG - pop widget QStatusBar statusbar
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.main_window.MainWindow object at 0x000002D8BB02C9D0>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.main_window.MainWindow object at 0x000001B89FD6CB80>
 PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.properties - DEBUG - setting property text
@@ -85,10 +85,10 @@ PyQt5.uic.uiparser - DEBUG - new topwidget None
 PyQt5.uic.uiparser - DEBUG - add action import_game_action to menu_file
 PyQt5.uic.uiparser - DEBUG - add action menu_file to menubar
 PyQt5.uic.uiparser - DEBUG - uiname is Dialog
-PyQt5.uic.uiparser - DEBUG - toplevel widget is GamePlayerResolveDialog
+PyQt5.uic.uiparser - DEBUG - toplevel widget is ChessPlayerResolveDialog
 PyQt5.uic.properties - DEBUG - setting property geometry
 PyQt5.uic.properties - DEBUG - setting property windowTitle
-PyQt5.uic.uiparser - DEBUG - push GamePlayerResolveDialog Dialog
+PyQt5.uic.uiparser - DEBUG - push ChessPlayerResolveDialog Dialog
 PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout
 PyQt5.uic.properties - DEBUG - setting property sizePolicy
 PyQt5.uic.properties - DEBUG - setting property minimumSize
@@ -96,14 +96,14 @@ PyQt5.uic.properties - DEBUG - setting property currentIndex
 PyQt5.uic.uiparser - DEBUG - push QStackedWidget stacked_widget
 PyQt5.uic.uiparser - DEBUG - push QWidget page_0
 PyQt5.uic.uiparser - DEBUG - pop widget QWidget page_0
-PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QStackedWidget object at 0x000002D8C03EA820>
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QStackedWidget object at 0x000001B8A38AB9D0>
 PyQt5.uic.uiparser - DEBUG - push QWidget page_1
 PyQt5.uic.uiparser - DEBUG - pop widget QWidget page_1
-PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QStackedWidget object at 0x000002D8C03EA820>
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QStackedWidget object at 0x000001B8A38AB9D0>
 PyQt5.uic.uiparser - DEBUG - pop widget QStackedWidget stacked_widget
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.GamePlayerResolveDialog object at 0x000002D8C03EA9D0>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.ChessPlayerResolveDialog object at 0x000001B8A38ABB80>
 PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
-PyQt5.uic.uiparser - DEBUG - pop widget GamePlayerResolveDialog Dialog
+PyQt5.uic.uiparser - DEBUG - pop widget ChessPlayerResolveDialog Dialog
 PyQt5.uic.uiparser - DEBUG - new topwidget None
 PyQt5.uic.uiparser - DEBUG - uiname is Form
 PyQt5.uic.uiparser - DEBUG - toplevel widget is SelectOptPage
@@ -115,30 +115,34 @@ PyQt5.uic.properties - DEBUG - setting property sizePolicy
 PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.properties - DEBUG - setting property textFormat
 PyQt5.uic.properties - DEBUG - setting property alignment
+PyQt5.uic.properties - DEBUG - setting property wordWrap
 PyQt5.uic.uiparser - DEBUG - push QLabel label
 PyQt5.uic.uiparser - DEBUG - pop widget QLabel label
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.SelectOptPage object at 0x000002D8C03EAD30>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A38ABEE0>
 PyQt5.uic.properties - DEBUG - setting property sizePolicy
 PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.uiparser - DEBUG - push QRadioButton radio_button_cancel_operation
 PyQt5.uic.uiparser - DEBUG - pop widget QRadioButton radio_button_cancel_operation
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.SelectOptPage object at 0x000002D8C03EAD30>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A38ABEE0>
 PyQt5.uic.properties - DEBUG - setting property sizePolicy
 PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.uiparser - DEBUG - push QRadioButton radio_button_choose_player
 PyQt5.uic.uiparser - DEBUG - pop widget QRadioButton radio_button_choose_player
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.SelectOptPage object at 0x000002D8C03EAD30>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A38ABEE0>
+PyQt5.uic.properties - DEBUG - setting property sizePolicy
 PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.uiparser - DEBUG - push QRadioButton radio_button_create_player
 PyQt5.uic.uiparser - DEBUG - pop widget QRadioButton radio_button_create_player
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.SelectOptPage object at 0x000002D8C03EAD30>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A38ABEE0>
 PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout
+PyQt5.uic.properties - DEBUG - setting property enabled
 PyQt5.uic.properties - DEBUG - setting property sizePolicy
+PyQt5.uic.properties - DEBUG - setting property minimumSize
 PyQt5.uic.properties - DEBUG - setting property cursor
 PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_next
 PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_next
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.SelectOptPage object at 0x000002D8C03EAD30>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A38ABEE0>
 PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
 PyQt5.uic.uiparser - DEBUG - pop layout QFormLayout formLayout
 PyQt5.uic.uiparser - DEBUG - pop widget SelectOptPage Form
@@ -151,17 +155,214 @@ PyQt5.uic.uiparser - DEBUG - push ChoosePlayerPage Form
 PyQt5.uic.uiparser - DEBUG - push QVBoxLayout verticalLayout
 PyQt5.uic.uiparser - DEBUG - push QTableView table_view_game_players
 PyQt5.uic.uiparser - DEBUG - pop widget QTableView table_view_game_players
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.ChoosePlayerPage object at 0x000002D8C041D1F0>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.ChoosePlayerPage object at 0x000001B8A4DE93A0>
 PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout
+PyQt5.uic.properties - DEBUG - setting property cursor
 PyQt5.uic.properties - DEBUG - setting property text
 PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_back
 PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_back
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.ChoosePlayerPage object at 0x000002D8C041D1F0>
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.ChoosePlayerPage object at 0x000001B8A4DE93A0>
+PyQt5.uic.properties - DEBUG - setting property cursor
 PyQt5.uic.properties - DEBUG - setting property text
-PyQt5.uic.uiparser - DEBUG - push QPushButton pushButton_ok
-PyQt5.uic.uiparser - DEBUG - pop widget QPushButton pushButton_ok
-PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.game_player_resolve_dialog.ChoosePlayerPage object at 0x000002D8C041D1F0>
+PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_accept
+PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_accept
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.ChoosePlayerPage object at 0x000001B8A4DE93A0>
 PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
 PyQt5.uic.uiparser - DEBUG - pop layout QVBoxLayout verticalLayout
 PyQt5.uic.uiparser - DEBUG - pop widget ChoosePlayerPage Form
+PyQt5.uic.uiparser - DEBUG - new topwidget None
+PyQt5.uic.uiparser - DEBUG - uiname is Form
+PyQt5.uic.uiparser - DEBUG - toplevel widget is CreatePlayerPage
+PyQt5.uic.properties - DEBUG - setting property geometry
+PyQt5.uic.properties - DEBUG - setting property windowTitle
+PyQt5.uic.uiparser - DEBUG - push CreatePlayerPage Form
+PyQt5.uic.uiparser - DEBUG - push QVBoxLayout verticalLayout
+PyQt5.uic.uiparser - DEBUG - push QFormLayout formLayout
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QLabel label
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QLabel label_2
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label_2
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QLabel label_3
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label_3
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QLabel label_4
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label_4
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.properties - DEBUG - setting property readOnly
+PyQt5.uic.uiparser - DEBUG - push QLineEdit line_edit_first_name
+PyQt5.uic.uiparser - DEBUG - pop widget QLineEdit line_edit_first_name
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.properties - DEBUG - setting property readOnly
+PyQt5.uic.uiparser - DEBUG - push QLineEdit line_edit_last_name
+PyQt5.uic.uiparser - DEBUG - pop widget QLineEdit line_edit_last_name
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.uiparser - DEBUG - push QTextEdit text_edit_comment
+PyQt5.uic.uiparser - DEBUG - pop widget QTextEdit text_edit_comment
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.properties - DEBUG - setting property displayFormat
+PyQt5.uic.uiparser - DEBUG - push QDateEdit date_edit_date_of_birth
+PyQt5.uic.uiparser - DEBUG - pop widget QDateEdit date_edit_date_of_birth
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.uiparser - DEBUG - pop layout QFormLayout formLayout
+PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout
+PyQt5.uic.properties - DEBUG - setting property cursor
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_back
+PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_back
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.properties - DEBUG - setting property cursor
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_accept
+PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_accept
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A4DE9700>
+PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
+PyQt5.uic.uiparser - DEBUG - pop layout QVBoxLayout verticalLayout
+PyQt5.uic.uiparser - DEBUG - pop widget CreatePlayerPage Form
+PyQt5.uic.uiparser - DEBUG - new topwidget None
+PyQt5.uic.uiparser - DEBUG - uiname is Dialog
+PyQt5.uic.uiparser - DEBUG - toplevel widget is ChessPlayerResolveDialog
+PyQt5.uic.properties - DEBUG - setting property geometry
+PyQt5.uic.properties - DEBUG - setting property windowTitle
+PyQt5.uic.uiparser - DEBUG - push ChessPlayerResolveDialog Dialog
+PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout
+PyQt5.uic.properties - DEBUG - setting property sizePolicy
+PyQt5.uic.properties - DEBUG - setting property minimumSize
+PyQt5.uic.properties - DEBUG - setting property currentIndex
+PyQt5.uic.uiparser - DEBUG - push QStackedWidget stacked_widget
+PyQt5.uic.uiparser - DEBUG - push QWidget page_0
+PyQt5.uic.uiparser - DEBUG - pop widget QWidget page_0
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QStackedWidget object at 0x000001B8A512B1F0>
+PyQt5.uic.uiparser - DEBUG - push QWidget page_1
+PyQt5.uic.uiparser - DEBUG - pop widget QWidget page_1
+PyQt5.uic.uiparser - DEBUG - new topwidget <PyQt5.QtWidgets.QStackedWidget object at 0x000001B8A512B1F0>
+PyQt5.uic.uiparser - DEBUG - pop widget QStackedWidget stacked_widget
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.ChessPlayerResolveDialog object at 0x000001B8A512B550>
+PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
+PyQt5.uic.uiparser - DEBUG - pop widget ChessPlayerResolveDialog Dialog
+PyQt5.uic.uiparser - DEBUG - new topwidget None
+PyQt5.uic.uiparser - DEBUG - uiname is Form
+PyQt5.uic.uiparser - DEBUG - toplevel widget is SelectOptPage
+PyQt5.uic.properties - DEBUG - setting property geometry
+PyQt5.uic.properties - DEBUG - setting property windowTitle
+PyQt5.uic.uiparser - DEBUG - push SelectOptPage Form
+PyQt5.uic.uiparser - DEBUG - push QFormLayout formLayout
+PyQt5.uic.properties - DEBUG - setting property sizePolicy
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.properties - DEBUG - setting property textFormat
+PyQt5.uic.properties - DEBUG - setting property alignment
+PyQt5.uic.properties - DEBUG - setting property wordWrap
+PyQt5.uic.uiparser - DEBUG - push QLabel label
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A512B790>
+PyQt5.uic.properties - DEBUG - setting property sizePolicy
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QRadioButton radio_button_cancel_operation
+PyQt5.uic.uiparser - DEBUG - pop widget QRadioButton radio_button_cancel_operation
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A512B790>
+PyQt5.uic.properties - DEBUG - setting property sizePolicy
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QRadioButton radio_button_choose_player
+PyQt5.uic.uiparser - DEBUG - pop widget QRadioButton radio_button_choose_player
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A512B790>
+PyQt5.uic.properties - DEBUG - setting property sizePolicy
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QRadioButton radio_button_create_player
+PyQt5.uic.uiparser - DEBUG - pop widget QRadioButton radio_button_create_player
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A512B790>
+PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout
+PyQt5.uic.properties - DEBUG - setting property enabled
+PyQt5.uic.properties - DEBUG - setting property sizePolicy
+PyQt5.uic.properties - DEBUG - setting property minimumSize
+PyQt5.uic.properties - DEBUG - setting property cursor
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_next
+PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_next
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.SelectOptPage object at 0x000001B8A512B790>
+PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
+PyQt5.uic.uiparser - DEBUG - pop layout QFormLayout formLayout
+PyQt5.uic.uiparser - DEBUG - pop widget SelectOptPage Form
+PyQt5.uic.uiparser - DEBUG - new topwidget None
+PyQt5.uic.uiparser - DEBUG - uiname is Form
+PyQt5.uic.uiparser - DEBUG - toplevel widget is ChoosePlayerPage
+PyQt5.uic.properties - DEBUG - setting property geometry
+PyQt5.uic.properties - DEBUG - setting property windowTitle
+PyQt5.uic.uiparser - DEBUG - push ChoosePlayerPage Form
+PyQt5.uic.uiparser - DEBUG - push QVBoxLayout verticalLayout
+PyQt5.uic.uiparser - DEBUG - push QTableView table_view_game_players
+PyQt5.uic.uiparser - DEBUG - pop widget QTableView table_view_game_players
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.ChoosePlayerPage object at 0x000001B8A512BC10>
+PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout
+PyQt5.uic.properties - DEBUG - setting property cursor
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_back
+PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_back
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.ChoosePlayerPage object at 0x000001B8A512BC10>
+PyQt5.uic.properties - DEBUG - setting property cursor
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_accept
+PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_accept
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.ChoosePlayerPage object at 0x000001B8A512BC10>
+PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
+PyQt5.uic.uiparser - DEBUG - pop layout QVBoxLayout verticalLayout
+PyQt5.uic.uiparser - DEBUG - pop widget ChoosePlayerPage Form
+PyQt5.uic.uiparser - DEBUG - new topwidget None
+PyQt5.uic.uiparser - DEBUG - uiname is Form
+PyQt5.uic.uiparser - DEBUG - toplevel widget is CreatePlayerPage
+PyQt5.uic.properties - DEBUG - setting property geometry
+PyQt5.uic.properties - DEBUG - setting property windowTitle
+PyQt5.uic.uiparser - DEBUG - push CreatePlayerPage Form
+PyQt5.uic.uiparser - DEBUG - push QVBoxLayout verticalLayout
+PyQt5.uic.uiparser - DEBUG - push QFormLayout formLayout
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QLabel label
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QLabel label_2
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label_2
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QLabel label_3
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label_3
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QLabel label_4
+PyQt5.uic.uiparser - DEBUG - pop widget QLabel label_4
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.properties - DEBUG - setting property readOnly
+PyQt5.uic.uiparser - DEBUG - push QLineEdit line_edit_first_name
+PyQt5.uic.uiparser - DEBUG - pop widget QLineEdit line_edit_first_name
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.properties - DEBUG - setting property readOnly
+PyQt5.uic.uiparser - DEBUG - push QLineEdit line_edit_last_name
+PyQt5.uic.uiparser - DEBUG - pop widget QLineEdit line_edit_last_name
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.uiparser - DEBUG - push QTextEdit text_edit_comment
+PyQt5.uic.uiparser - DEBUG - pop widget QTextEdit text_edit_comment
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.properties - DEBUG - setting property displayFormat
+PyQt5.uic.uiparser - DEBUG - push QDateEdit date_edit_date_of_birth
+PyQt5.uic.uiparser - DEBUG - pop widget QDateEdit date_edit_date_of_birth
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.uiparser - DEBUG - pop layout QFormLayout formLayout
+PyQt5.uic.uiparser - DEBUG - push QHBoxLayout horizontalLayout
+PyQt5.uic.properties - DEBUG - setting property cursor
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_back
+PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_back
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.properties - DEBUG - setting property cursor
+PyQt5.uic.properties - DEBUG - setting property text
+PyQt5.uic.uiparser - DEBUG - push QPushButton push_button_accept
+PyQt5.uic.uiparser - DEBUG - pop widget QPushButton push_button_accept
+PyQt5.uic.uiparser - DEBUG - new topwidget <app.presenters.chess_player_resolve_dialog.CreatePlayerPage object at 0x000001B8A512BF70>
+PyQt5.uic.uiparser - DEBUG - pop layout QHBoxLayout horizontalLayout
+PyQt5.uic.uiparser - DEBUG - pop layout QVBoxLayout verticalLayout
+PyQt5.uic.uiparser - DEBUG - pop widget CreatePlayerPage Form
 PyQt5.uic.uiparser - DEBUG - new topwidget None

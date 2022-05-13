@@ -4,7 +4,7 @@ import typing
 from app.data_repositories import IGamePlayerRepo
 
 
-class GamePlayerTableModel(QAbstractTableModel):
+class ChessPlayerTableModel(QAbstractTableModel):
 
     def __init__(self, chess_player_repo: IGamePlayerRepo, criterion):
         super().__init__()

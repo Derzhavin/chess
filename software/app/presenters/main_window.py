@@ -29,7 +29,4 @@ class MainWindow(QtWidgets.QMainWindow):
                                                   "Game (*.pgn)", options=options)
 
         pgn_import_service = PgnImportService(self.engine, ChessGameRepo, ChessPlayerRepo)
-        if pgn_import_service.load_game_from_pgn(pgn_path, self, self.config):
-            QMessageBox.information(self, 'Информация', 'Партия была успешно импортирована')
-        else:
-            QMessageBox.critical(self, 'Ошибка' , 'Не удалось импортировать партию')
+        pgn_import_service.load_game_from_pgn(pgn_path, self, self.config)
