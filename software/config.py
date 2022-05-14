@@ -5,8 +5,14 @@ from logging import DEBUG
 class Config(object):
     log_file = 'chess.log'
     log_level = DEBUG
-
+    db_uri = 'sqlite:///chess.sqlite'
     main_window_ui_path = 'app/views/main_window.ui'
+    game_player_resolve_dialog = 'app/views/game_player_resolve_dialog.ui'
+    game_player_resolve_step_select_opt_widget = 'app/views/game_player_resolve_step_select_opt_widget.ui'
+    game_player_resolve_step_choose_player_opt_widget = 'app/views/game_player_resolve_step_choose_player_opt_widget.ui'
+    game_player_resolve_step_create_player_opt_widget = 'app/views/game_player_resolve_step_create_player_opt_widget.ui'
+    game_selection_dialog = 'app/views/game_selection_dialog.ui'
+    wait_dialog_ui_path = 'app/views/wait_dialog.ui'
 
     chessboard_size = 500
     chessboard_x = 0

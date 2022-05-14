@@ -1,8 +1,9 @@
 from PyQt5.QtCore import QObject
 
-from .data_repositories.chess_game_repo import ChessGameRepo
-from .factories import AssetsFactory
+from .assets_factory import AssetsFactory
 from .presenters import MainWindow
+from .store import init_engine
+
 import logging
 
 
@@ -21,9 +22,9 @@ class App(QObject):
 
         AssetsFactory(config)
 
-        chess_game_repo = chess_game_repo = ChessGameRepo()
+        engine = init_engine(config.db_uri)
 
-        self.main_window = MainWindow(chess_game_repo, config)
+        self.main_window = MainWindow(engine, config)
 
     def start(self):
         self.main_window.show()

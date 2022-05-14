@@ -1,1 +1,4 @@
+from .chess_player_resolve_dialog import ChessPlayerResolveDialog
+from .chess_game_selection_dialog import ChessGameSelectionDialog
+from .wait_dialog import WaitDialog
 from .main_window import MainWindow

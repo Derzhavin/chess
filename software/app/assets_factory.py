@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QPixmap, QIcon
 from singleton_decorator import singleton
-from app.models import ChessFigure
+from app.store import ChessFigure
 
 
 @singleton

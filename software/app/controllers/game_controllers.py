@@ -1,16 +1,16 @@
-from app.models import ChessGame, ChessFigure
+from app.store import ChessGame, ChessFigure
 from app.views import ChessBoardView
 
 
 class GameController(object):
 
-    def __init__(self, view: ChessBoardView, game: ChessGame):
+    def __init__(self, view: ChessBoardView, game: ChessGame = ChessGame.create_game_with_zero_moves()):
         super().__init__()
         self._game_on = False
         self._game = game
         self._view = view
 
-    def represent_common_starting_postion(self):
+    def represent_postion(self):
         for i in range(8):
             for j in range(8):
                 fig = self._game.fig(i, j)
