@@ -1,1 +1,1 @@
-from .qt_models import ChessPlayerTableModel
+from .qt_models import ChessPlayerTableModel, ChessGameTableModel

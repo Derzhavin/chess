@@ -26,7 +26,7 @@ class Move(Base):
     end_move = Column('end_move', String(2), nullable=False)
     figure = Column('figure', Enum(ChessFigure), nullable=False)
     move_number = Column('move_number', SmallInteger, nullable=False)
-    chess_game = Column('chess_game', Integer, ForeignKey('chess_game.id'))
+    chess_game = Column('chess_game', Integer, ForeignKey('chess_game.id', ondelete="CASCADE"), nullable=False)
 
     def __init__(self, start_move: str, end_move: str, figure: ChessFigure, move_number: int):
         self.start_move = start_move
@@ -63,8 +63,8 @@ class ChessGame(Base):
     begin_date = Column('begin_date', Date, nullable=True)
     winner = Column('winner', Enum(GameOutcome), nullable=False)
 
-    chess_players = relationship('AssociationChessPlayerChessGame', back_populates='chess_game')
-    moves = relationship('Move')
+    chess_players = relationship('AssociationChessPlayerChessGame', back_populates='chess_game', cascade="all, delete")
+    moves = relationship('Move', cascade="all, delete")
 
     def __init__(self, begin_date: date, winner: GameOutcome, white_player: ChessPlayer, black_player: ChessPlayer,
                  moves):
@@ -77,7 +77,7 @@ class ChessGame(Base):
         self.black_player = black_player
 
     def add_move(self, move: Move):
-        self._moves.append(move)
+        self.moves.append(move)
 
     @property
     def cur_pos(self) -> int:

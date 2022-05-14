@@ -16,6 +16,14 @@ class IChessGameRepo(ABC):
     def get_games(self, criterion):
         pass
 
+    @staticmethod
+    def delete_game(self, criterion):
+        pass
+
+    @abstractmethod
+    def count(self, criterion):
+        pass
+
 
 class IGamePlayerRepo(ABC):
 

@@ -24,3 +24,10 @@ class ChessGameRepo(IChessGameRepo):
 
     def get_games(self, criterion):
         return self.__db_session.query(ChessGame).where(criterion).all()
+
+    def delete_game(self, criterion):
+        chess_game = self.__db_session.query(ChessGame).filter(criterion).first()
+        self.__db_session.delete(chess_game)
+
+    def count(self, criterion):
+        return self.__db_session.query(ChessGame).filter(criterion).count()

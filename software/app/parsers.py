@@ -44,8 +44,8 @@ class ChessGamePgnParser:
         board = first_game.board()
         for i, move in enumerate(first_game.mainline_moves()):
             move_str = str(move)
-            move_begin = move_str[:2]
-            move_end = move_str[2:]
+            start_move = move_str[:2]
+            end_move = move_str[2:]
             san = board.san(move)
 
             chess_figure = ChessFigure.wp
@@ -62,7 +62,7 @@ class ChessGamePgnParser:
             elif san[0] == 'K':
                 chess_figure = ChessFigure.wk if board.turn == chess.WHITE else ChessFigure.bk
 
-            chess_move = Move(chess_figure, move_begin, move_end, i)
+            chess_move = Move(start_move, end_move, chess_figure, i)
             self.moves.append(chess_move)
             board.push(move)
 
