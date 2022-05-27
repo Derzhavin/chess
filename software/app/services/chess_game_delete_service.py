@@ -5,35 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from app.presenters import ChessGameSelectionDialog, WaitDialog
 from app.data_repositories import ChessGameRepo
 from app.store import ChessGame
-from app.multithreading import Worker
-
-
-class ChessGameDeleter:
-
-    def __init__(self, engine, criterion, chess_game_repo_cls):
-        self.engine = engine
-        self.chess_game_repo_cls = chess_game_repo_cls
-        self.criterion = criterion
-
-    def delete_game(self):
-        self.session = sessionmaker(self.engine)()
-        self.session.begin()
-        chess_game_repo = self.chess_game_repo_cls(self.session)
-        chess_game_repo.delete_game(self.criterion)
-        self.session.commit()
-        self.session.close()
-
-
-class ChessGameDeleteWorker(Worker):
-
-    def __init__(self, chess_game_deleter: ChessGameDeleter):
-        super().__init__()
-        self.chess_game_deleter = chess_game_deleter
-
-    @pyqtSlot()
-    def run(self):
-        self.chess_game_deleter.delete_game()
-        self.finished.emit()
+from app.multithreading import Worker, ChessGameDeleter, ChessGameDeleteWorker
 
 
 class ChessGameDeleteService:
@@ -49,7 +21,8 @@ class ChessGameDeleteService:
         chess_game_repo = ChessGameRepo(self.session)
 
         if chess_game_repo.count(True) > 0:
-            chess_game_selection_dialog = ChessGameSelectionDialog(self.parent_widget, self.config, chess_game_repo, True)
+            chess_game_selection_dialog = ChessGameSelectionDialog(self.parent_widget, self.config, self.engine, ChessGameRepo)
+            chess_game_selection_dialog.load_data()
 
             if chess_game_selection_dialog.exec():
                 game_id = chess_game_selection_dialog.selected_game_id
@@ -75,7 +48,6 @@ class ChessGameDeleteService:
 
         else:
             QMessageBox.information(self.parent_widget, 'Информация', 'В базе данных отсутствуют партии.')
-
 
     def __del__(self):
         self.session.close()

@@ -181,6 +181,7 @@
     </property>
     <addaction name="import_game_action"/>
     <addaction name="action_delete_game"/>
+    <addaction name="action_find_chess_game"/>
    </widget>
    <addaction name="menu_file"/>
   </widget>
@@ -218,6 +219,11 @@
   <action name="action_delete_game">
    <property name="text">
     <string>Удалить партию</string>
+   </property>
+  </action>
+  <action name="action_find_chess_game">
+   <property name="text">
+    <string>Найти партию</string>
    </property>
   </action>
  </widget>

@@ -1,1 +1,1 @@
-from .qt_worker import Worker
+from .qt_worker import Worker, ChessGameDeleter, ChessGameDeleteWorker

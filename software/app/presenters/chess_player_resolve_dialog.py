@@ -11,19 +11,19 @@ from app.models import ChessPlayerTableModel
 class SelectOptPage(QtWidgets.QWidget):
     def __init__(self, parent, config):
         super().__init__(parent)
-        uic.loadUi(config.game_player_resolve_step_select_opt_widget, self)
+        uic.loadUi(config.game_player_resolve_step_select_opt_widget_ui_path, self)
 
 
 class ChoosePlayerPage(QtWidgets.QWidget):
     def __init__(self, parent, config):
         super().__init__(parent)
-        uic.loadUi(config.game_player_resolve_step_choose_player_opt_widget, self)
+        uic.loadUi(config.game_player_resolve_step_choose_player_opt_widget_ui_path, self)
 
 
 class CreatePlayerPage(QtWidgets.QWidget):
     def __init__(self, parent, config):
         super().__init__(parent)
-        uic.loadUi(config.game_player_resolve_step_create_player_opt_widget, self)
+        uic.loadUi(config.game_player_resolve_step_create_player_opt_widget_ui_path, self)
 
 
 class ChessPlayerResolveDialog(QtWidgets.QDialog):
@@ -38,7 +38,7 @@ class ChessPlayerResolveDialog(QtWidgets.QDialog):
         self.criterion = criterion
         self.first_name = first_name
         self.last_name = last_name
-        uic.loadUi(config.game_player_resolve_dialog, self)
+        uic.loadUi(config.game_player_resolve_dialog_ui_path, self)
         self.stacked_widget.removeWidget(self.page_0)
         self.stacked_widget.removeWidget(self.page_1)
 
