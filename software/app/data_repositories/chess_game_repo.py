@@ -1,6 +1,9 @@
+from sqlalchemy import and_
+
 from .repo_interfaces import IChessGameRepo
-from app.store import ChessGame, AssociationChessPlayerChessGame
+from app.store import ChessGame, ChessPlayer, AssociationChessPlayerChessGame
 from sqlalchemy.orm import Session
+from datetime import date
 
 
 class ChessGameRepo(IChessGameRepo):
@@ -23,7 +26,7 @@ class ChessGameRepo(IChessGameRepo):
         return self.__db_session.query(ChessGame).where(ChessGame.id == chess_game_id).one()
 
     def get_games(self, criterion):
-        return self.__db_session.query(ChessGame).where(criterion).all()
+        return self.__db_session.query(ChessGame).filter(criterion).all()
 
     def delete_game(self, criterion):
         chess_game = self.__db_session.query(ChessGame).filter(criterion).first()
@@ -31,3 +34,36 @@ class ChessGameRepo(IChessGameRepo):
 
     def count(self, criterion):
         return self.__db_session.query(ChessGame).filter(criterion).count()
+
+    def get_games_super_query(self, begin_date: date=None, white_player_first_name_pattern=None,
+                              white_player_last_name_pattern=None,
+                              black_player_first_name_pattern=None, black_player_last_name_pattern=None):
+        criterion_data = []
+        if begin_date:
+            criterion_data += [and_(True, ChessGame.begin_date == begin_date)]
+
+        if white_player_first_name_pattern:
+            criterion_data += [and_(ChessPlayer.first_name.like(white_player_first_name_pattern),
+                                AssociationChessPlayerChessGame.color == AssociationChessPlayerChessGame.Color.white)]
+
+        if white_player_last_name_pattern:
+            criterion_data += [and_(ChessPlayer.last_name.like(white_player_last_name_pattern),
+                                AssociationChessPlayerChessGame.color == AssociationChessPlayerChessGame.Color.white)]
+
+        if black_player_first_name_pattern:
+            criterion_data += [and_(ChessPlayer.first_name.like(black_player_first_name_pattern),
+                                    AssociationChessPlayerChessGame.color == AssociationChessPlayerChessGame.Color.black)]
+
+        if black_player_last_name_pattern:
+            criterion_data += [and_(ChessPlayer.last_name.like(black_player_last_name_pattern),
+                                    AssociationChessPlayerChessGame.color == AssociationChessPlayerChessGame.Color.black)]
+
+        criterion = True if not criterion_data else and_(*criterion_data)
+
+        query = self.__db_session \
+            .query(ChessGame) \
+            .join(AssociationChessPlayerChessGame) \
+            .join(ChessPlayer) \
+            .filter(criterion)
+        print(str(query))
+        return query.all()

@@ -7,6 +7,8 @@ from app.controllers.game_controllers import GameController
 from app.data_repositories import ChessGameRepo, ChessPlayerRepo
 from app.services import PgnImportService, ChessGameDeleteService
 
+from app.presenters import ChessGameSearchDialog
+
 
 class MainWindow(QtWidgets.QMainWindow):
 
@@ -23,9 +25,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.engine = engine
         self.import_game_action.triggered.connect(self.on_game_import_triggered)
         self.action_delete_game.triggered.connect(self.on_game_delete_triggered)
+        self.action_find_chess_game.triggered.connect(self.on_find_chess_game_triggered)
 
     def on_game_import_triggered(self):
-        file_dialog  = QFileDialog(self)
+        file_dialog = QFileDialog(self)
         file_dialog.setNameFilter("Game (*.pgn)")
         file_dialog.setWindowTitle("Импорт игры")
 
@@ -37,3 +40,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_game_delete_triggered(self):
         chess_game_delete_service = ChessGameDeleteService(self.config, self, self.engine, ChessGameRepo)
         chess_game_delete_service.delete_game()
+
+    def on_find_chess_game_triggered(self):
+        chess_game_search_dialog = ChessGameSearchDialog(self, self.config, self.engine, ChessGameRepo)
+        chess_game_search_dialog.load_data()
+
+        if chess_game_search_dialog.exec():
+            pass

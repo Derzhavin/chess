@@ -24,7 +24,7 @@ class PgnImportService:
 
         self.session.begin()
 
-        first_name, last_name = pgn_parser.white_player
+        last_name, first_name = pgn_parser.white_player
         criterion = and_(ChessPlayer.first_name == first_name, ChessPlayer.last_name == last_name)
 
         if self.chess_player_repo.exists(criterion):
@@ -43,7 +43,7 @@ class PgnImportService:
                 return
             elif chess_player_resolve_dialog.selected_option == ChessPlayerResolveDialog.SelectedOptionStep.choose_player_op:
                 white_player = self.chess_player_repo.get_player_by_id(chess_player_resolve_dialog.target_chess_player_id)
-            elif chess_player_resolve_dialog.selected_option ==  ChessPlayerResolveDialog.SelectedOptionStep.create_player_op:
+            elif chess_player_resolve_dialog.selected_option == ChessPlayerResolveDialog.SelectedOptionStep.create_player_op:
                 white_player = ChessPlayer(
                     first_name,
                     last_name,
@@ -55,7 +55,7 @@ class PgnImportService:
             white_player = ChessPlayer(first_name, last_name, None, '')
             self.chess_player_repo.add_player(white_player)
 
-        first_name, last_name = pgn_parser.black_player
+        last_name, first_name = pgn_parser.black_player
         criterion = and_(ChessPlayer.first_name == first_name, ChessPlayer.last_name == last_name)
 
         if self.chess_player_repo.exists(criterion):

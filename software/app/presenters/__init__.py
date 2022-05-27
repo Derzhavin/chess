@@ -1,4 +1,6 @@
+from .wait_animation_dialog import WaitAnimationDialog
 from .chess_player_resolve_dialog import ChessPlayerResolveDialog
 from .chess_game_selection_dialog import ChessGameSelectionDialog
+from .chess_game_search_dialog import ChessGameSearchDialog
 from .wait_dialog import WaitDialog
 from .main_window import MainWindow

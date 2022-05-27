@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QAbstractTableModel, QModelIndex, Qt, QVariant
+from PyQt5.QtCore import QAbstractTableModel, QModelIndex, Qt, QVariant, pyqtSlot, pyqtSignal
 import typing
 
 from app.data_repositories import IGamePlayerRepo
@@ -62,49 +62,55 @@ class ChessPlayerTableModel(QAbstractTableModel):
 
 
 class ChessGameTableModel(QAbstractTableModel):
+    data_changed = pyqtSignal(QModelIndex, QModelIndex)
 
-    def __init__(self, chess_game_repo: IChessGameRepo, criterion):
+    def __init__(self):
         super().__init__()
-        self._chess_game_repo = chess_game_repo
-        self.criterion = criterion
+        self._chess_games = []
+
+    @property
+    def chess_games(self):
+        return self._chess_games
+
+    @chess_games.setter
+    def chess_games(self, games):
+        self._chess_games = games
 
     def columnCount(self, parent: QModelIndex = ...) -> int:
         return 7
 
     def rowCount(self, parent: QModelIndex = ...) -> int:
-        return self._chess_game_repo.count(self.criterion)
+        return len(self._chess_games)
 
     def data(self, index: QModelIndex, role: int = ...) -> typing.Any:
-        chess_games = self._chess_game_repo.get_games(self.criterion)
-
-        if not index.isValid():
+        if not index.isValid() or self._chess_games is None:
             return QVariant()
 
-        if index.row() >= len(chess_games) or index.row() < 0:
+        if index.row() >= len(self._chess_games) or index.row() < 0:
             return QVariant()
 
         if role == Qt.DisplayRole:
             if index.column() == 0:
-                return chess_games[index.row()].id
+                return self._chess_games[index.row()].id
             if index.column() == 1:
-                return chess_games[index.row()].begin_date
+                return self._chess_games[index.row()].begin_date
             if index.column() == 2:
-                if chess_games[index.row()].winner == ChessGame.GameOutcome.white:
+                if self._chess_games[index.row()].winner == ChessGame.GameOutcome.white:
                     return '1-0'
-                if chess_games[index.row()].winner == ChessGame.GameOutcome.black:
+                if self._chess_games[index.row()].winner == ChessGame.GameOutcome.black:
                     return '0-1'
                 return '1/2-1/2'
             if index.column() == 3:
-                white_player = list(filter(lambda e: e.color == AssociationChessPlayerChessGame.Color.white, chess_games[index.row()].chess_players))[0].chess_player
+                white_player = list(filter(lambda e: e.color == AssociationChessPlayerChessGame.Color.white, self._chess_games[index.row()].chess_players))[0].chess_player
                 return white_player.first_name + ' ' + white_player.last_name
             if index.column() == 4:
-                white_player = list(filter(lambda e: e.color == AssociationChessPlayerChessGame.Color.white, chess_games[index.row()].chess_players))[0].chess_player
+                white_player = list(filter(lambda e: e.color == AssociationChessPlayerChessGame.Color.white, self._chess_games[index.row()].chess_players))[0].chess_player
                 return white_player.id
             if index.column() == 5:
-                black_player = list(filter(lambda e: e.color == AssociationChessPlayerChessGame.Color.black, chess_games[index.row()].chess_players))[0].chess_player
+                black_player = list(filter(lambda e: e.color == AssociationChessPlayerChessGame.Color.black, self._chess_games[index.row()].chess_players))[0].chess_player
                 return black_player.first_name + ' ' + black_player.last_name
             if index.column() == 6:
-                black_player = list(filter(lambda e: e.color == AssociationChessPlayerChessGame.Color.black, chess_games[index.row()].chess_players))[0].chess_player
+                black_player = list(filter(lambda e: e.color == AssociationChessPlayerChessGame.Color.black, self._chess_games[index.row()].chess_players))[0].chess_player
                 return black_player.id
 
         return QVariant()
