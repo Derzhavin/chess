@@ -135,3 +135,6 @@ class ChessPlayerResolveDialog(QtWidgets.QDialog):
 
     def on_choose_player_page_row_clicked(self, cur: QItemSelection, prev: QItemSelection):
         self.target_chess_player_id = cur.indexes()[0].data()
+
+    def date_of_birth_selected(self):
+        return self.create_player_page.check_box_date_nessary.isChecked()

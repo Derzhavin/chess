@@ -47,7 +47,9 @@ class PgnImportService:
                 white_player = ChessPlayer(
                     first_name,
                     last_name,
-                    chess_player_resolve_dialog.target_chess_player_date_of_birth,
+                    chess_player_resolve_dialog.target_chess_player_date_of_birth
+                    if chess_player_resolve_dialog.date_of_birth_selected() else
+                    None,
                     chess_player_resolve_dialog.target_chess_player_comment
                 )
                 self.chess_player_repo.add_player(white_player)
@@ -79,7 +81,9 @@ class PgnImportService:
                 black_player = ChessPlayer(
                     first_name,
                     last_name,
-                    chess_player_resolve_dialog.target_chess_player_date_of_birth,
+                    chess_player_resolve_dialog.target_chess_player_date_of_birth
+                    if chess_player_resolve_dialog.date_of_birth_selected() else
+                    None,
                     chess_player_resolve_dialog.target_chess_player_comment
                 )
                 self.chess_player_repo.add_player(black_player)
