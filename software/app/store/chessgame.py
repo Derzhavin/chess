@@ -107,10 +107,6 @@ class ChessGame(Base):
     def add_move(self, move: Move):
         self.moves.append(move)
 
-    @property
-    def cur_pos(self) -> int:
-        return self._cur_pos
-
     def fig(self, i, j) -> ChessFigure:
         return self._positions[self._cur_pos][i][j]
 
@@ -150,9 +146,18 @@ class ChessGame(Base):
 
         return chess_game
 
+    @property
+    def cur_pos(self):
+        return self._cur_pos
+
     @cur_pos.setter
-    def cur_pos(self, value):
-        self._cur_pos = value
+    def cur_pos(self, pos_no):
+        if pos_no < 0:
+            self._cur_pos = 0
+        elif pos_no < self.positions_num:
+            self._cur_pos = pos_no
+        else:
+            self._cur_pos = 0
 
     def _moves_to_positions(self):
         board = chess.Board()
