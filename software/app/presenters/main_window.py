@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtGui import QColor, QFont
-from PyQt5.QtWidgets import QFileDialog, QMessageBox, QHeaderView
+from PyQt5.QtCore import pyqtSlot, QItemSelection, QModelIndex
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableView
 
 from app.views.chessboard import ChessBoardView
 from app.controllers.game_controllers import GameController
@@ -28,7 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._game_controller.game_finished_sig.connect(self.on_game_finished)
         self._game_controller.game_returned_to_begin_sig.connect(self.on_game_returned_to_begin)
         self._game_controller.game_started_sig.connect(self.on_game_started)
-        self._game_controller.game_next_move_sig.connect(self.on_game_next_move_happen)
+        self._game_controller.game_move_changed.connect(self.on_game_move_changed)
         self._game_controller.represent_position()
 
         self.engine = engine
@@ -41,6 +41,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.next_step_tool_button.clicked.connect(self.on_next_step_button_clicked)
 
         self.table_view_moves.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+
+        self.update_pos = True
 
     def on_game_import_triggered(self):
         file_dialog = QFileDialog(self)
@@ -73,6 +75,8 @@ class MainWindow(QtWidgets.QMainWindow):
             game_moves_table_model = GameMovesTableModel()
             game_moves_table_model.moves = chess_game.moves
             self.table_view_moves.setModel(game_moves_table_model)
+            selection_model = self.table_view_moves.selectionModel()
+            selection_model.selectionChanged.connect(self.on_row_moves_clicked)
             self._game_controller.game = chess_game
             self._show_paused_mode()
 
@@ -80,6 +84,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_play_button_clicked(self):
         if self._game_controller.game.positions_num < 1:
             return
+        self.table_view_moves.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self._game_controller.game_on = not self._game_controller.game_on
 
     @pyqtSlot()
@@ -91,6 +96,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self._game_controller.do_next_move()
 
     def on_game_finished(self):
+        self.table_view_moves.clearSelection()
+        self.table_view_moves.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
         self._game_controller.to_begin()
 
     def on_game_started(self):
@@ -109,5 +116,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.prev_step_tool_button.setEnabled(True)
         self.next_step_tool_button.setEnabled(True)
 
-    def on_game_next_move_happen(self):
-        pass
+    def on_game_move_changed(self):
+        pos = self._game_controller.game.cur_pos
+        next_index = self.table_view_moves.model().index((pos - 1) // 2, 1 if pos % 2 else 2)
+        self.update_pos = False
+        self.table_view_moves.setCurrentIndex(next_index)
+
+    def on_row_moves_clicked(self, cur: QItemSelection, prev: QItemSelection):
+        if not cur.indexes() or not self.update_pos:
+            self.update_pos = True
+            return
+        index = cur.indexes()[0]
+
+        pos_no = index.row() * 2 + (index.column())
+
+        if index.column() != 0 and pos_no < self._game_controller.game.positions_num:
+            self._game_controller.move_to_pos_index(pos_no)
