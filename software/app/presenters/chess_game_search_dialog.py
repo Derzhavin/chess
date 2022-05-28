@@ -28,6 +28,7 @@ class ChessGameSearchDialog(QtWidgets.QDialog):
     def load_data(self, target_date: date = None, white_player_first_name_pattern=None,
                   white_player_last_name_pattern=None,
                   black_player_first_name_pattern=None, black_player_last_name_pattern=None):
+        self.push_button_load_chess_game.setEnabled(False)
 
         table_model = ChessGameTableModel()
 
@@ -41,6 +42,7 @@ class ChessGameSearchDialog(QtWidgets.QDialog):
         if table_model.chess_games:
             index = table_model.index(0, 0)
             self.table_view.selectionModel().select(index, QItemSelectionModel.ClearAndSelect | QItemSelectionModel.Rows)
+            self.push_button_load_chess_game.setEnabled(True)
 
     def on_row_clicked(self, cur: QItemSelection, prev: QItemSelection):
         if self.table_view.model().chess_games:
@@ -50,7 +52,9 @@ class ChessGameSearchDialog(QtWidgets.QDialog):
         self.session.close()
 
     def on_push_button_find_game_clicked(self):
-
+        if not self.table_view.model().chess_games:
+            return
+        
         if self.check_box_chess_game_date.isChecked():
             target_date = self.date_edit_chess_game.date().toPyDate()
         else:
