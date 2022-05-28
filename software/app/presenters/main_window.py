@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from PyQt5.QtCore import pyqtSlot, Qt
+from PyQt5.QtGui import QColor, QFont
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QHeaderView
 
 from app.views.chessboard import ChessBoardView
 from app.controllers.game_controllers import GameController
@@ -39,6 +39,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.prev_step_tool_button.clicked.connect(self.on_prev_step_button_clicked)
         self.next_step_tool_button.clicked.connect(self.on_next_step_button_clicked)
 
+        self.table_view_moves.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+
     def on_game_import_triggered(self):
         file_dialog = QFileDialog(self)
         file_dialog.setNameFilter("Game (*.pgn)")
@@ -64,7 +66,6 @@ class MainWindow(QtWidgets.QMainWindow):
             game_moves_table_model = GameMovesTableModel()
             game_moves_table_model.moves = chess_game.moves
             self.table_view_moves.setModel(game_moves_table_model)
-
             self._game_controller.game = chess_game
 
     @pyqtSlot()
