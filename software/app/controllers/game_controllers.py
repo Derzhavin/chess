@@ -10,7 +10,7 @@ class GameController(QObject):
     game_started_sig = pyqtSignal()
     game_next_move_sig = pyqtSignal()
 
-    def __init__(self, view: ChessBoardView, game: ChessGame = ChessGame.create_game_with_zero_moves()):
+    def __init__(self, view: ChessBoardView, game: ChessGame = ChessGame()):
         super().__init__()
         self._game_on = False
         self._game = game
@@ -83,7 +83,6 @@ class GameController(QObject):
                 self._view.chessboard.cell(i, j).highlight_off()
 
         if self._game.cur_pos != 0:
-
             start_str = self.game.cur_move_start()
             end_str = self.game.cur_move_end()
             start_y, start_x = PosParser.letter_to_coords(start_str)

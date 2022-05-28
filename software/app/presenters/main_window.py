@@ -74,6 +74,7 @@ class MainWindow(QtWidgets.QMainWindow):
             game_moves_table_model.moves = chess_game.moves
             self.table_view_moves.setModel(game_moves_table_model)
             self._game_controller.game = chess_game
+            self._show_paused_mode()
 
     @pyqtSlot()
     def on_play_button_clicked(self):
