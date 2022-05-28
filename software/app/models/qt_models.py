@@ -1,10 +1,11 @@
 from PyQt5.QtCore import QAbstractTableModel, QModelIndex, Qt, QVariant, pyqtSlot, pyqtSignal
 import typing
+import math
 
 from app.data_repositories import IGamePlayerRepo
 from app.data_repositories import IChessGameRepo
 
-from app.store import ChessGame
+from app.store import ChessGame, chess_figure_to_str, MoveStringifier
 
 from app.store import AssociationChessPlayerChessGame
 
@@ -131,5 +132,60 @@ class ChessGameTableModel(QAbstractTableModel):
                 return 'Чёрные'
             elif section == 6:
                 return 'ID игрока за чёрных'
+
+        return QVariant()
+
+
+class GameMovesTableModel(QAbstractTableModel):
+
+    def __init__(self):
+        super().__init__()
+        self._moves = []
+
+    @property
+    def moves(self):
+        return self._moves
+
+    @moves.setter
+    def moves(self, moves):
+        self._moves = moves
+
+    def columnCount(self, parent: QModelIndex = ...) -> int:
+        return 3
+
+    def rowCount(self, parent: QModelIndex = ...) -> int:
+        return int(math.ceil(len(self._moves) / 2))
+
+    def data(self, index: QModelIndex, role: int = ...) -> typing.Any:
+        if not index.isValid() or self._moves is None:
+            return QVariant()
+
+        limit_row = int(math.ceil(len(self._moves) / 2))
+        if index.row() >= limit_row or index.row() < 0:
+            return QVariant()
+
+        if role == Qt.DisplayRole:
+            row = index.row()
+            if index.column() == 0:
+                return index.row() + 1
+
+            if index.column() == 1:
+                move = self._moves[index.row() * 2]
+                return MoveStringifier.stringify(move)
+
+            if index.column() == 2 and 2 * (index.row() + 1) < len(self._moves):
+                move = self._moves[index.row() * 2 + 1]
+                return MoveStringifier.stringify(move)
+
+        return QVariant()
+
+    def headerData(self, section: int, orientation: Qt.Orientation, role: int = ...) -> typing.Any:
+        if role == Qt.DisplayRole and orientation == Qt.Horizontal:
+            if section == 0:
+                return 'Номер хода'
+            elif section == 1:
+                return 'Ход белых'
+            elif section == 2:
+                return 'Ход чёрных'
 
         return QVariant()
