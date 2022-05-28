@@ -86,8 +86,11 @@ class ChessGame(Base):
     chess_players = relationship('AssociationChessPlayerChessGame', back_populates='chess_game', cascade="all, delete")
     moves = relationship('Move', cascade="all, delete", lazy='selectin')
 
-    def __init__(self, begin_date: date, winner: GameOutcome, white_player: ChessPlayer, black_player: ChessPlayer,
-                 moves):
+    def __init__(self, begin_date: date = date.today(), winner: GameOutcome = GameOutcome.draw,
+                 white_player: ChessPlayer = None, black_player: ChessPlayer = None,
+                 moves=None):
+        if moves is None:
+            moves = []
         self._positions = [[[ChessFigure.empty for _ in range(8)] for _ in range(8)]]
         self.moves = moves
         self._cur_pos = 0
@@ -160,6 +163,8 @@ class ChessGame(Base):
             self._cur_pos = 0
 
     def _moves_to_positions(self):
+        if not self.moves:
+            return
         board = chess.Board()
         self._positions = [PosParser.parse(board.epd())]
         for move in self.moves:
