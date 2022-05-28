@@ -155,8 +155,17 @@
           <property name="tabletTracking">
            <bool>true</bool>
           </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>49</number>
+          </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>50</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
           </attribute>
          </widget>
         </item>
