@@ -5,9 +5,10 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from app.views.chessboard import ChessBoardView
 from app.controllers.game_controllers import GameController
 from app.data_repositories import ChessGameRepo, ChessPlayerRepo
-from app.services import PgnImportService, ChessGameDeleteService
+from app.services import PgnImportService, ChessGameDeleteService, ChessGameLoadService
 
 from app.presenters import ChessGameSearchDialog
+from app.models import GameMovesTableModel
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -46,4 +47,9 @@ class MainWindow(QtWidgets.QMainWindow):
         chess_game_search_dialog.load_data()
 
         if chess_game_search_dialog.exec():
-            pass
+            chess_game_load_service = ChessGameLoadService(self.engine, ChessGameRepo)
+            chess_game = chess_game_load_service.load_game(chess_game_search_dialog.selected_game_id)
+
+            game_moves_table_model = GameMovesTableModel()
+            game_moves_table_model.moves = chess_game.moves
+            self.table_view_moves.setModel(game_moves_table_model)

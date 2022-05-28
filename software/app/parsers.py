@@ -48,6 +48,8 @@ class ChessGamePgnParser:
             end_move = move_str[2:]
             san = board.san(move)
 
+            meta = ''
+
             chess_figure = ChessFigure.wp
             if len(san) == 2:
                 chess_figure = ChessFigure.wp if board.turn == chess.WHITE else ChessFigure.bp
@@ -58,11 +60,26 @@ class ChessGamePgnParser:
             elif san[0] == 'B':
                 chess_figure = ChessFigure.wb if board.turn == chess.WHITE else ChessFigure.bb
             elif san[0] == 'Q':
-                chess_figure = ChessFigure.wb if board.turn == chess.WHITE else ChessFigure.wb
+                chess_figure = ChessFigure.wq if board.turn == chess.WHITE else ChessFigure.wq
             elif san[0] == 'K':
                 chess_figure = ChessFigure.wk if board.turn == chess.WHITE else ChessFigure.bk
+            elif san.startswith('O-O'):
+                chess_figure = ChessFigure.wk if board.turn == chess.WHITE else ChessFigure.bk
+                meta = san
 
-            chess_move = Move(start_move, end_move, chess_figure, i)
+            if 'x' in san:
+                meta = 'x'
+
+            if '+' in san:
+                meta += '+'
+
+            if '#' in san:
+                meta += '#'
+
+            if '=' in san:
+                meta += '='
+
+            chess_move = Move(start_move, end_move, meta, chess_figure, i)
             self.moves.append(chess_move)
             board.push(move)
 

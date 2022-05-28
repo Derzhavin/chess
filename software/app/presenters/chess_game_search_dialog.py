@@ -20,7 +20,7 @@ class ChessGameSearchDialog(QtWidgets.QDialog):
         self.table_view.setSelectionBehavior(QAbstractItemView.SelectRows)
 
         self.push_button_find_game.clicked.connect(self.on_push_button_find_game_clicked)
-
+        self.push_button_load_chess_game.clicked.connect(self.accept)
         self.load_data()
 
         self.selected_game_id = -1

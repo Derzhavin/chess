@@ -12,6 +12,21 @@ class ChessFigure(enum.IntEnum):
     bb, bk, bn, bp, bq, br, wb, wk, wn, wp, wq, wr, empty = range(13)
 
 
+chess_figure_to_str = {
+    ChessFigure.wp: '',
+    ChessFigure.bp: '',
+    ChessFigure.wr: 'R',
+    ChessFigure.br: 'R',
+    ChessFigure.wn: 'N',
+    ChessFigure.bn: 'N',
+    ChessFigure.wb: 'B',
+    ChessFigure.bb: 'B',
+    ChessFigure.wq: 'Q',
+    ChessFigure.bq: 'Q',
+    ChessFigure.wk: 'K',
+    ChessFigure.bk: 'K'
+}
+
 ChessPos = namedtuple('ChessPos', 'move_id, is_white_move, pos')
 
 metadata_obj = MetaData()
@@ -24,13 +39,15 @@ class Move(Base):
     id = Column('id', Integer, primary_key=True, autoincrement=True)
     start_move = Column('start_move', String(2), nullable=False)
     end_move = Column('end_move', String(2), nullable=False)
+    meta = Column('meta', String(), nullable=False)
     figure = Column('figure', Enum(ChessFigure), nullable=False)
     move_number = Column('move_number', SmallInteger, nullable=False)
     chess_game = Column('chess_game', Integer, ForeignKey('chess_game.id', ondelete="CASCADE"), nullable=False)
 
-    def __init__(self, start_move: str, end_move: str, figure: ChessFigure, move_number: int):
+    def __init__(self, start_move: str, end_move: str, meta: str, figure: ChessFigure, move_number: int):
         self.start_move = start_move
         self.end_move = end_move
+        self.meta = meta
         self.figure = figure
         self.move_number = move_number
 
@@ -64,7 +81,7 @@ class ChessGame(Base):
     winner = Column('winner', Enum(GameOutcome), nullable=False)
 
     chess_players = relationship('AssociationChessPlayerChessGame', back_populates='chess_game', cascade="all, delete")
-    moves = relationship('Move', cascade="all, delete")
+    moves = relationship('Move', cascade="all, delete", lazy='selectin')
 
     def __init__(self, begin_date: date, winner: GameOutcome, white_player: ChessPlayer, black_player: ChessPlayer,
                  moves):
@@ -133,3 +150,26 @@ class AssociationChessPlayerChessGame(Base):
 
     chess_player = relationship("ChessPlayer", back_populates="chess_games")
     chess_game = relationship("ChessGame", back_populates="chess_players")
+
+
+class MoveStringifier:
+
+    @staticmethod
+    def stringify(move: Move):
+        if move.meta.startswith('O-O'):
+            return move.meta
+
+        move_str = ''
+
+        move_str += chess_figure_to_str[move.figure]
+
+        if 'x' in move.meta:
+            move_str += 'x'
+            if move.figure == ChessFigure.wp or move.figure == ChessFigure.bp:
+                move_str = move.start_move[0] + move_str
+        move_str += move.end_move
+
+        if '+' in move.meta:
+            move_str += '+'
+
+        return move_str
