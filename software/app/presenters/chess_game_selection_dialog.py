@@ -23,6 +23,8 @@ class ChessGameSelectionDialog(QtWidgets.QDialog):
         self.selected_game_id = -1
         self.criterion = True
 
+        self.table_view.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+
     def load_data(self):
         self.table_model._chess_games = self.chess_game_repo.get_games(self.criterion)
 

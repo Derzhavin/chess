@@ -18,12 +18,36 @@ class ChessGameSearchDialog(QtWidgets.QDialog):
 
         self.table_view.setSelectionMode(QAbstractItemView.SingleSelection)
         self.table_view.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table_view.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
         self.push_button_find_game.clicked.connect(self.on_push_button_find_game_clicked)
         self.push_button_load_chess_game.clicked.connect(self.accept)
         self.load_data()
 
         self.selected_game_id = -1
+
+        self.check_box_white_player_first_name\
+            .stateChanged.connect(self.on_white_player_first_name_selected_changed)
+        self.check_box_white_player_last_name\
+            .stateChanged.connect(self.on_white_player_last_name_selected_changed)
+        self.check_box_black_player_first_name\
+            .stateChanged.connect(self.on_black_player_first_name_selected_changed)
+        self.check_box_black_player_last_name\
+            .stateChanged.connect(self.on_black_player_last_name_selected_changed)
+
+        self.line_edit_white_player_first_name\
+            .textChanged[str].connect(self.on_white_player_first_name_selected_changed)
+        self.line_edit_white_player_last_name\
+            .textChanged[str].connect(self.on_white_player_last_name_selected_changed)
+        self.line_edit_black_player_first_name\
+            .textChanged[str].connect(self.on_black_player_first_name_selected_changed)
+        self.line_edit_black_player_last_name\
+            .textChanged[str].connect(self.on_black_player_last_name_selected_changed)
+
+        self.check_box_white_player_first_name_valid = True
+        self.check_box_white_player_last_name_valid = True
+        self.check_box_black_player_first_name_valid = True
+        self.check_box_black_player_last_name_valid = True
 
     def load_data(self, target_date: date = None, white_player_first_name_pattern=None,
                   white_player_last_name_pattern=None,
@@ -51,8 +75,70 @@ class ChessGameSearchDialog(QtWidgets.QDialog):
     def __del__(self):
         self.session.close()
 
+    def is_fields_valid(self):
+        return all([self.check_box_white_player_first_name_valid,
+                           self.check_box_white_player_last_name_valid,
+                           self.check_box_black_player_first_name_valid,
+                           self.check_box_black_player_last_name_valid])
+
+    def on_white_player_first_name_selected_changed(self):
+        if self.check_box_white_player_first_name.isChecked() and self.line_edit_white_player_first_name.text() == '':
+            self.line_edit_white_player_first_name\
+                .setStyleSheet('border-width: 1px; border-style: solid; border-color: red;')
+            self.check_box_white_player_first_name_valid = False
+        else:
+            self.line_edit_white_player_first_name.setStyleSheet('')
+            self.check_box_white_player_first_name_valid = True
+
+        if self.is_fields_valid():
+            self.push_button_find_game.setEnabled(True)
+        else:
+            self.push_button_find_game.setEnabled(False)
+
+    def on_white_player_last_name_selected_changed(self):
+        if self.check_box_white_player_last_name.isChecked() and self.line_edit_white_player_last_name.text() == '':
+            self.line_edit_white_player_last_name \
+                .setStyleSheet('border-width: 1px; border-style: solid; border-color: red;')
+            self.check_box_white_player_last_name_valid = False
+        else:
+            self.line_edit_white_player_last_name.setStyleSheet('')
+            self.check_box_white_player_last_name_valid = True
+
+        if self.is_fields_valid():
+            self.push_button_find_game.setEnabled(True)
+        else:
+            self.push_button_find_game.setEnabled(False)
+
+    def on_black_player_first_name_selected_changed(self):
+        if self.check_box_black_player_first_name.isChecked() and self.line_edit_black_player_first_name.text() == '':
+            self.line_edit_black_player_first_name \
+                .setStyleSheet('border-width: 1px; border-style: solid; border-color: red;')
+            self.check_box_black_player_first_name_valid = False
+        else:
+            self.line_edit_black_player_first_name.setStyleSheet('')
+            self.check_box_black_player_first_name_valid = True
+
+        if self.is_fields_valid():
+            self.push_button_find_game.setEnabled(True)
+        else:
+            self.push_button_find_game.setEnabled(False)
+
+    def on_black_player_last_name_selected_changed(self):
+        if self.check_box_black_player_last_name.isChecked() and self.line_edit_black_player_last_name.text() == '':
+            self.line_edit_black_player_last_name \
+                .setStyleSheet('border-width: 1px; border-style: solid; border-color: red;')
+            self.check_box_black_player_last_name_valid = False
+        else:
+            self.line_edit_black_player_last_name.setStyleSheet('')
+            self.check_box_black_player_last_name_valid = True
+
+        if self.is_fields_valid():
+            self.push_button_find_game.setEnabled(True)
+        else:
+            self.push_button_find_game.setEnabled(False)
+
     def on_push_button_find_game_clicked(self):
-        if not self.table_view.model().chess_games:
+        if not self.is_fields_valid():
             return
         
         if self.check_box_chess_game_date.isChecked():

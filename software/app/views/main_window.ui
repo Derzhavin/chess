@@ -232,7 +232,7 @@
   </action>
   <action name="action_find_chess_game">
    <property name="text">
-    <string>Найти партию</string>
+    <string>Найти/загрузить партию</string>
    </property>
   </action>
  </widget>
