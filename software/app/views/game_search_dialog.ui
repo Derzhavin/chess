@@ -153,6 +153,9 @@
    </item>
    <item>
     <widget class="QPushButton" name="push_button_load_chess_game">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>

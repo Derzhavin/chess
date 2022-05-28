@@ -11,6 +11,7 @@ from app.services import PgnImportService, ChessGameDeleteService, ChessGameLoad
 from app.presenters import ChessGameSearchDialog
 from app.models import GameMovesTableModel
 from app.assets_factory import AssetsFactory
+from sqlalchemy.orm import Session
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -56,10 +57,16 @@ class MainWindow(QtWidgets.QMainWindow):
         chess_game_delete_service.delete_game()
 
     def on_find_chess_game_triggered(self):
+        with Session(self.engine) as session:
+            chess_game_repo = ChessGameRepo(session)
+            if chess_game_repo.count(True) < 1:
+                QMessageBox.information(self, 'Поиск партии', 'В базе данных отсутствуют партии.')
+                return
+
         chess_game_search_dialog = ChessGameSearchDialog(self, self.config, self.engine, ChessGameRepo)
         chess_game_search_dialog.load_data()
 
-        if chess_game_search_dialog.exec():
+        if chess_game_search_dialog.exec() and chess_game_search_dialog.selected_game_id > -1:
             chess_game_load_service = ChessGameLoadService(self.engine, ChessGameRepo)
             chess_game = chess_game_load_service.load_game(chess_game_search_dialog.selected_game_id)
 
