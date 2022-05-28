@@ -8,7 +8,7 @@ class GameController(QObject):
     game_returned_to_begin_sig = pyqtSignal()
     game_finished_sig = pyqtSignal()
     game_started_sig = pyqtSignal()
-    game_next_move_sig = pyqtSignal()
+    game_move_changed = pyqtSignal()
 
     def __init__(self, view: ChessBoardView, game: ChessGame = ChessGame()):
         super().__init__()
@@ -50,11 +50,12 @@ class GameController(QObject):
             self.game_finished_sig.emit()
         else:
             self.represent_position()
-            self.game_next_move_sig.emit()
+            self.game_move_changed.emit()
 
     def do_prev_move(self):
         self._game.cur_pos -= 1
         self.represent_position()
+        self.game_move_changed.emit()
 
         if self._game.cur_pos == 0:
             self.game_on = False
@@ -67,6 +68,10 @@ class GameController(QObject):
 
     def to_end(self):
         self.game.cur_pos = self.game.positions_num - 1
+        self.represent_position()
+
+    def move_to_pos_index(self, ind: int):
+        self._game.cur_pos = ind
         self.represent_position()
 
     def represent_position(self):
