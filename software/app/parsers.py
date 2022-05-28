@@ -55,6 +55,8 @@ class ChessGamePgnParser:
                 chess_figure = ChessFigure.wp if board.turn == chess.WHITE else ChessFigure.bp
             elif san[0] == 'R':
                 chess_figure = ChessFigure.wr if board.turn == chess.WHITE else ChessFigure.br
+                if san[1] != 'x' and san[2].isalpha():
+                    meta += san[1]
             elif san[0] == 'N':
                 chess_figure = ChessFigure.wn if board.turn == chess.WHITE else ChessFigure.bn
             elif san[0] == 'B':

@@ -163,6 +163,10 @@ class MoveStringifier:
 
         move_str += chess_figure_to_str[move.figure]
 
+        if move.figure == ChessFigure.wr or move.figure == ChessFigure.br:
+            if move.meta and move.meta[0] != 'x' and move.meta[0].isalnum():
+                move_str += move.meta[0]
+
         if 'x' in move.meta:
             move_str += 'x'
             if move.figure == ChessFigure.wp or move.figure == ChessFigure.bp:
