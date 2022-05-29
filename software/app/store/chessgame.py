@@ -86,7 +86,7 @@ class ChessGame(Base):
     chess_players = relationship('AssociationChessPlayerChessGame', back_populates='chess_game', cascade="all, delete")
     moves = relationship('Move', cascade="all, delete", lazy='selectin')
 
-    def __init__(self, begin_date: date = date.today(), winner: GameOutcome = GameOutcome.draw,
+    def __init__(self, begin_date: date = None, winner: GameOutcome = GameOutcome.draw,
                  white_player: ChessPlayer = None, black_player: ChessPlayer = None,
                  moves=None):
         if moves is None:
@@ -180,27 +180,7 @@ class MoveStringifier:
 
     @staticmethod
     def stringify(move: Move):
-        if move.meta.startswith('O-O'):
-            return move.meta
-
-        move_str = ''
-
-        move_str += chess_figure_to_str[move.figure]
-
-        if move.figure == ChessFigure.wr or move.figure == ChessFigure.br:
-            if move.meta and move.meta[0] != 'x' and move.meta[0].isalnum():
-                move_str += move.meta[0]
-
-        if 'x' in move.meta:
-            move_str += 'x'
-            if move.figure == ChessFigure.wp or move.figure == ChessFigure.bp:
-                move_str = move.start_move[0] + move_str
-        move_str += move.end_move
-
-        if '+' in move.meta:
-            move_str += '+'
-
-        return move_str
+        return move.meta
 
 
 class PosParser(object):

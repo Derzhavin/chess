@@ -173,7 +173,7 @@ class GameMovesTableModel(QAbstractTableModel):
                 move = self._moves[index.row() * 2]
                 return MoveStringifier.stringify(move)
 
-            if index.column() == 2 and 2 * (index.row() + 1) < len(self._moves):
+            if index.column() == 2 and 2 * (index.row() + 1) <= len(self._moves):
                 move = self._moves[index.row() * 2 + 1]
                 return MoveStringifier.stringify(move)
 

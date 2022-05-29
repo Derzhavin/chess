@@ -161,7 +161,7 @@ class ChessGameSearchDialog(QtWidgets.QDialog):
         else:
             black_player_first_name_pattern = None
 
-        if self.check_box_white_player_last_name.isChecked():
+        if self.check_box_black_player_last_name.isChecked():
             black_player_last_name_pattern = self.line_edit_black_player_last_name.text()
         else:
             black_player_last_name_pattern = None

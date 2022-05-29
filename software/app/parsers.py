@@ -12,7 +12,7 @@ class ChessGamePgnParser:
         self.pgn_path = pgn_path
         self.black_player = ['', '']
         self.white_player = ['', '']
-        self.begin_date = date.today()
+        self.begin_date = None
         self.game_outcome = ChessGame.GameOutcome.draw
         self.moves = []
 
@@ -25,7 +25,13 @@ class ChessGamePgnParser:
         delim = ',' if ',' in first_game.headers['White'] else ' '
 
         self.white_player = first_game.headers['White'].split(delim)
+        if len(self.white_player) == 1:
+            self.white_player = [self.white_player[0], '']
+
         self.black_player = first_game.headers['Black'].split(delim)
+        if len(self.black_player) == 1:
+            self.black_player = [self.black_player[0], '']
+
         try:
             self.begin_date = date.fromisoformat(first_game.headers['Date'].replace('.', '-'))
         except:
@@ -48,15 +54,13 @@ class ChessGamePgnParser:
             end_move = move_str[2:]
             san = board.san(move)
 
-            meta = ''
+            meta = san
 
             chess_figure = ChessFigure.wp
             if len(san) == 2:
                 chess_figure = ChessFigure.wp if board.turn == chess.WHITE else ChessFigure.bp
             elif san[0] == 'R':
                 chess_figure = ChessFigure.wr if board.turn == chess.WHITE else ChessFigure.br
-                if san[1] != 'x' and san[2].isalpha():
-                    meta += san[1]
             elif san[0] == 'N':
                 chess_figure = ChessFigure.wn if board.turn == chess.WHITE else ChessFigure.bn
             elif san[0] == 'B':
@@ -67,19 +71,6 @@ class ChessGamePgnParser:
                 chess_figure = ChessFigure.wk if board.turn == chess.WHITE else ChessFigure.bk
             elif san.startswith('O-O'):
                 chess_figure = ChessFigure.wk if board.turn == chess.WHITE else ChessFigure.bk
-                meta = san
-
-            if 'x' in san:
-                meta = 'x'
-
-            if '+' in san:
-                meta += '+'
-
-            if '#' in san:
-                meta += '#'
-
-            if '=' in san:
-                meta += '='
 
             chess_move = Move(start_move, end_move, meta, chess_figure, i)
             self.moves.append(chess_move)

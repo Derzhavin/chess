@@ -79,6 +79,7 @@ class MainWindow(QtWidgets.QMainWindow):
             selection_model.selectionChanged.connect(self.on_row_moves_clicked)
             self._game_controller.game = chess_game
             self._show_paused_mode()
+            self.table_view_moves.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
 
     @pyqtSlot()
     def on_play_button_clicked(self):
@@ -86,6 +87,11 @@ class MainWindow(QtWidgets.QMainWindow):
             return
         self.table_view_moves.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self._game_controller.game_on = not self._game_controller.game_on
+
+        if self._game_controller.game_on:
+            self._show_playing_mode()
+        else:
+            self._show_paused_mode()
 
     @pyqtSlot()
     def on_prev_step_button_clicked(self):
@@ -110,6 +116,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.play_tool_button.setIcon(AssetsFactory().play_tool_button_pixmap)
         self.prev_step_tool_button.setEnabled(False)
         self.next_step_tool_button.setEnabled(False)
+        self.table_view_moves.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
 
     def _show_playing_mode(self):
         self.play_tool_button.setIcon(AssetsFactory().pause_tool_button_pixmap)

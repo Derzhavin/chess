@@ -1,4 +1,4 @@
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 
 from .repo_interfaces import IChessGameRepo
 from app.store import ChessGame, ChessPlayer, AssociationChessPlayerChessGame
@@ -42,21 +42,30 @@ class ChessGameRepo(IChessGameRepo):
         if begin_date:
             criterion_data += [and_(True, ChessGame.begin_date == begin_date)]
 
+        white_player_criterion_data = []
         if white_player_first_name_pattern:
-            criterion_data += [and_(ChessPlayer.first_name.like(white_player_first_name_pattern),
+            white_player_criterion_data += [and_(ChessPlayer.first_name.like(white_player_first_name_pattern),
                                 AssociationChessPlayerChessGame.color == AssociationChessPlayerChessGame.Color.white)]
 
         if white_player_last_name_pattern:
-            criterion_data += [and_(ChessPlayer.last_name.like(white_player_last_name_pattern),
+            white_player_criterion_data += [and_(ChessPlayer.last_name.like(white_player_last_name_pattern),
                                 AssociationChessPlayerChessGame.color == AssociationChessPlayerChessGame.Color.white)]
 
+        black_player_criterion_data = []
         if black_player_first_name_pattern:
-            criterion_data += [and_(ChessPlayer.first_name.like(black_player_first_name_pattern),
+            black_player_criterion_data += [and_(ChessPlayer.first_name.like(black_player_first_name_pattern),
                                     AssociationChessPlayerChessGame.color == AssociationChessPlayerChessGame.Color.black)]
 
         if black_player_last_name_pattern:
-            criterion_data += [and_(ChessPlayer.last_name.like(black_player_last_name_pattern),
+            black_player_criterion_data += [and_(ChessPlayer.last_name.like(black_player_last_name_pattern),
                                     AssociationChessPlayerChessGame.color == AssociationChessPlayerChessGame.Color.black)]
+
+        if white_player_criterion_data and black_player_criterion_data:
+            criterion_data += [or_(and_(*white_player_criterion_data), and_(*black_player_criterion_data))]
+        elif white_player_criterion_data:
+            criterion_data += [and_(True, *white_player_criterion_data)]
+        elif black_player_criterion_data:
+            criterion_data += [and_(True, *black_player_criterion_data)]
 
         criterion = True if not criterion_data else and_(*criterion_data)
 
